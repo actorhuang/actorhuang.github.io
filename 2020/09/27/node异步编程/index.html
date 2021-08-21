@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>node异步编程 | Hexo</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Node.js异步编程同步API，异步API同步API：只有当前API执行完成后，才能继续执行下一个API 12console.log(&amp;#x27;before&amp;#x27;);console.log(&amp;#x27;after&amp;#x27;);  异步API：当前API的执行不会阻塞后续代码的执行 12345console.log(&amp;#x27;before&amp;#x27;);setTimeout(	() &#x3D;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="node异步编程">
+<meta property="og:url" content="http://example.com/2020/09/27/node%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Node.js异步编程同步API，异步API同步API：只有当前API执行完成后，才能继续执行下一个API 12console.log(&amp;#x27;before&amp;#x27;);console.log(&amp;#x27;after&amp;#x27;);  异步API：当前API的执行不会阻塞后续代码的执行 12345console.log(&amp;#x27;before&amp;#x27;);setTimeout(	() &#x3D;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-09-27T09:07:09.000Z">
+<meta property="article:modified_time" content="2021-08-21T03:28:37.603Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="node">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+				<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+			<h1 class="header-author"><a href="/">John Doe</a></h1>
+		</hgroup>
+
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">Home</a></li>
+				        
+							<li><a href="/archives">Archives</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="half-header-menu">
+						<a class="hide">Home</a>
+						<a>Tags</a>
+						<a>Links</a>
+						<a>About</a>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+						<!-- music -->
+						
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/ajax/" style="font-size: 13.33px;">ajax</a> <a href="/tags/bootstrap/" style="font-size: 10px;">bootstrap</a> <a href="/tags/css/" style="font-size: 16.67px;">css</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javaweb/" style="font-size: 13.33px;">javaweb</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/node/" style="font-size: 20px;">node</a> <a href="/tags/vue/" style="font-size: 13.33px;">vue</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/">github</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">I&#39;m a developer.</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide"></h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author"></h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">Home</a></li>
+		        
+					<li><a href="/archives">Archives</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-node异步编程" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/09/27/node%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/" class="article-date">
+  	<time datetime="2020-09-27T09:07:09.000Z" itemprop="datePublished">2020-09-27</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      node异步编程
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node/" rel="tag">node</a></li></ul>
+	</div>
+
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Node-js异步编程"><a href="#Node-js异步编程" class="headerlink" title="Node.js异步编程"></a>Node.js异步编程</h3><h4 id="同步API，异步API"><a href="#同步API，异步API" class="headerlink" title="同步API，异步API"></a>同步API，异步API</h4><p>同步API：只有当前API执行完成后，才能继续执行下一个API</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;before&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;after&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>异步API：当前API的执行不会阻塞后续代码的执行</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;before&#x27;</span>);</span><br><span class="line"><span class="built_in">setTimeout</span>(</span><br><span class="line">	<span class="function">() =&gt;</span> &#123;<span class="built_in">console</span>.log(<span class="string">&#x27;last&#x27;</span>);</span><br><span class="line">&#125;,<span class="number">2000</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;after&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>区别</strong>：</p>
+<ul>
+<li>同步API可以从返回值中拿到API执行的结果，但是异步API是不可以的</li>
+<li>同步API从上到下依次执行，前面代码会阻塞后面代码的执行；异步API不会等待API执行完后再向下执行代码（node不会从上到下依次执行代码，而是先将同步API执行完再去执行异步API）</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//同步</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">n1,n2</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> n1 + n2;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> result = sum (<span class="number">10</span> , <span class="number">20</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//异步</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getMsg</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> &#123; <span class="attr">msg</span>: <span class="string">&#x27;Hello Node.js&#x27;</span>&#125;</span><br><span class="line">	&#125;,<span class="number">2000</span>);</span><br><span class="line">	<span class="comment">//return undefined;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> msg = getMsg();</span><br><span class="line"><span class="built_in">console</span>.log(msg);		<span class="comment">//undefined，异步不会阻塞后面代码的运行</span></span><br></pre></td></tr></table></figure>
+
+<p>那么要怎么取到异步API的返回值呢？</p>
+<h4 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h4><p>自己定义函数让别人去调用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//getData函数定义</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getData</span>(<span class="params">callback</span>)</span>&#123;&#125;</span><br><span class="line"><span class="comment">//getData函数调用</span></span><br><span class="line">getData (<span class="function">() =&gt;</span> &#123;&#125;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getMsg</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		callback(&#123;</span><br><span class="line">			<span class="attr">msg</span>: <span class="string">&#x27;Hello Node.js&#x27;</span></span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;,<span class="number">2000</span>)</span><br><span class="line">&#125;</span><br><span class="line">getMsg(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(data);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//异步API不能通过return获取到返回结果，而是需要通过回调函数来获取</span></span><br></pre></td></tr></table></figure>
+
+<p>如果异步API后面的执行依赖当前异步API 的执行结果，但实际上后续代码在执行的时候异步API还没有返回结果，这个问题要怎么解决呢？</p>
+<p>假如需要依次读取三个文件A，B，C</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">fs.readFile(&#x27;./1.txt&#x27;,(err,res1)=&gt;&#123;</span><br><span class="line">	console.log(res1)</span><br><span class="line">	fs.readFile(&#x27;./2.txt&#x27;,(err,res2)=&gt;&#123;</span><br><span class="line">		console.log(res2)</span><br><span class="line">		fs.readFile(&#x27;./3.txt&#x27;,(err,res3)=&gt;&#123;</span><br><span class="line">			console.log(res3)</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>功能实现了但是不利于阅读和维护，写出<strong>回调地狱</strong></p>
+<blockquote>
+<p>回调地狱根本问题是：</p>
+<ol>
+<li>嵌套函数存在耦合性，一旦有所改动，就会牵一发而动全身</li>
+<li>嵌套函数多了就很难处理错误</li>
+</ol>
+</blockquote>
+<h4 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h4><p>Promise出现的目的是解决Node.js异步编程中回调地狱的问题。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//resolve将异步的结果通过参数的形式传递出去</span></span><br><span class="line">    <span class="comment">//reject将失败的结果传递出去</span></span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">      resolve(&#123; <span class="attr">name</span>: <span class="string">&quot;张三&quot;</span> &#125;);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      reject(<span class="string">&quot;失败了&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, <span class="number">2000</span>);</span><br><span class="line">&#125;);</span><br><span class="line">promise</span><br><span class="line">  .then(<span class="function">(<span class="params">result</span>) =&gt;</span> <span class="built_in">console</span>.log(result))</span><br><span class="line">  .catch(<span class="function">(<span class="params">error</span>) =&gt;</span> <span class="built_in">console</span>.log(error));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  fs.readFile(<span class="string">&quot;./1.txt&quot;</span>, <span class="string">&quot;utf8&quot;</span>, <span class="function">(<span class="params">error, result</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (error != <span class="literal">null</span>) &#123;</span><br><span class="line">      reject(error);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      resolve(result);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">promise</span><br><span class="line">  .then(<span class="function">(<span class="params">result</span>) =&gt;</span> <span class="built_in">console</span>.log(result))</span><br><span class="line">  .catch(<span class="function">(<span class="params">error</span>) =&gt;</span> <span class="built_in">console</span>.log(error));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>解决上述回调地狱问题：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">p1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    fs.readFile(<span class="string">&quot;./1.txt&quot;</span>, <span class="string">&quot;utf8&quot;</span>, <span class="function">(<span class="params">error, result</span>) =&gt;</span> &#123;</span><br><span class="line">      resolve(result);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">p2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    fs.readFile(<span class="string">&quot;./2.txt&quot;</span>, <span class="string">&quot;utf8&quot;</span>, <span class="function">(<span class="params">error, result</span>) =&gt;</span> &#123;</span><br><span class="line">      resolve(result);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">p3</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    fs.readFile(<span class="string">&quot;./3.txt&quot;</span>, <span class="string">&quot;utf8&quot;</span>, <span class="function">(<span class="params">error, result</span>) =&gt;</span> &#123;</span><br><span class="line">      resolve(result);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line">p1()</span><br><span class="line">  .then(<span class="function">(<span class="params">r1</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(r1);</span><br><span class="line">    <span class="keyword">return</span> p2();</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function">(<span class="params">r2</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(r2);</span><br><span class="line">    <span class="keyword">return</span> p3();</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function">(<span class="params">r3</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(r3);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="异步函数"><a href="#异步函数" class="headerlink" title="异步函数"></a>异步函数</h4><p>异步函数是异步编程语法的终极解决方案，它可以让我们将异步代码写成同步的形式，让代码不再有回调函数嵌套，使代码变得清晰明了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fn = <span class="keyword">async</span> () =&gt; &#123;&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)</span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">async function fn()&#123;</span><br><span class="line">	throw &#x27;出错了&#x27;;</span><br><span class="line">	return 123;</span><br><span class="line">&#125;</span><br><span class="line">fn().then(data =&gt; console.log(data))</span><br><span class="line">	.catch(err =&gt; console.log(err))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">async function p1()&#123;</span><br><span class="line">	return &#x27;p1&#x27;;</span><br><span class="line">&#125;</span><br><span class="line">async function p2()&#123;</span><br><span class="line">	return &#x27;p2&#x27;;</span><br><span class="line">&#125;</span><br><span class="line">async function p3()&#123;</span><br><span class="line">	return &#x27;p3&#x27;;</span><br><span class="line">&#125;</span><br><span class="line">async function run()&#123;</span><br><span class="line">	let r1 = await p1()</span><br><span class="line">	let r2 = await p2()</span><br><span class="line">	let r3 = await p3()</span><br><span class="line">	console.log(r1)</span><br><span class="line">	console.log(r2)</span><br><span class="line">	console.log(r3)</span><br><span class="line">&#125;</span><br><span class="line">run();</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="async关键字"><a href="#async关键字" class="headerlink" title="async关键字"></a>async关键字</h5><ol>
+<li>普通函数定义前加async关键字，普通函数变成异步函数</li>
+<li>异步函数默认返回promise对象</li>
+<li>在异步函数内部使用return关键字进行结果返回，结果会被包裹在promise对象中，return关键字代替了resolve方法</li>
+<li>在异步函数内部使用throw关键字抛出程序异常</li>
+<li>调用异步函数再链式调用then方法获取异步函数执行结果</li>
+<li>调用异步函数再链式调用catch方法获取异步函数执行的错误信息</li>
+</ol>
+<h5 id="await关键字"><a href="#await关键字" class="headerlink" title="await关键字"></a>await关键字</h5><ol>
+<li>await关键字只能出现在异步函数中</li>
+<li>await promise await后面只能写promise对象，写其他类型的API是不可以的</li>
+<li>await关键字可暂停异步函数向下执行，直到promise返回结果</li>
+</ol>
+<p>解决回调地狱，读取文件方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>);</span><br><span class="line"><span class="comment">//改造现有异步函数api，让其返回promise对象，从而支持异步函数语法</span></span><br><span class="line"><span class="keyword">const</span> promisify = <span class="built_in">require</span>(<span class="string">&quot;util&quot;</span>).promisify;</span><br><span class="line"><span class="comment">//调用promisify方法改造现有异步API，让其返回promise对象</span></span><br><span class="line"><span class="keyword">const</span> readFile = promisify(fs.readFile);</span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> r1 = <span class="keyword">await</span> readFile(<span class="string">&quot;./1.txt&quot;</span>, <span class="string">&quot;utf8&quot;</span>);</span><br><span class="line">  <span class="keyword">let</span> r2 = <span class="keyword">await</span> readFile(<span class="string">&quot;./2.txt&quot;</span>, <span class="string">&quot;utf8&quot;</span>);</span><br><span class="line">  <span class="keyword">let</span> r3 = <span class="keyword">await</span> readFile(<span class="string">&quot;./3.txt&quot;</span>, <span class="string">&quot;utf8&quot;</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(r1);</span><br><span class="line">  <span class="built_in">console</span>.log(r2);</span><br><span class="line">  <span class="built_in">console</span>.log(r3);</span><br><span class="line">&#125;</span><br><span class="line">run();</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/10/03/%E5%87%A0%E7%A7%8D%E8%87%AA%E9%80%82%E5%BA%94%E5%B8%83%E5%B1%80/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          几种自适应布局
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/09/23/node%E6%95%B0%E6%8D%AE%E5%BA%93/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">node数据库</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2021 John Doe
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/preccrep/hexo-theme-jelly" target="_blank">Jelly</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

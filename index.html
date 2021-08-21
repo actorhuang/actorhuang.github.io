@@ -86,7 +86,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a>
+						<a href="/tags/ajax/" style="font-size: 13.33px;">ajax</a> <a href="/tags/bootstrap/" style="font-size: 10px;">bootstrap</a> <a href="/tags/css/" style="font-size: 16.67px;">css</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javaweb/" style="font-size: 13.33px;">javaweb</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/node/" style="font-size: 20px;">node</a> <a href="/tags/vue/" style="font-size: 13.33px;">vue</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a>
 					</div>
 				</section>
 				
@@ -148,11 +148,11 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-我的第一篇博客" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-未处理的rejection" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2021/08/20/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="article-date">
-  	<time datetime="2021-08-20T14:33:09.000Z" itemprop="datePublished">2021-08-20</time>
+      <a href="/2020/12/11/%E6%9C%AA%E5%A4%84%E7%90%86%E7%9A%84rejection/" class="article-date">
+  	<time datetime="2020-12-11T09:07:09.000Z" itemprop="datePublished">2020-12-11</time>
 </a>
     </div>
   
@@ -165,8 +165,8 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/20/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">
-        我的第一篇博客
+      <a class="article-title" href="/2020/12/11/%E6%9C%AA%E5%A4%84%E7%90%86%E7%9A%84rejection/">
+        未处理的rejection
         
       </a>
     </h1>
@@ -177,8 +177,19 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#标题</p>
-<p>##内容</p>
+        <h2 id="未处理的rejection"><a href="#未处理的rejection" class="headerlink" title="未处理的rejection"></a>未处理的rejection</h2><p>当一个error没有被处理会发生什么？例如，忘了在链的尾端附加.catch，</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  noSuchFunction(); <span class="comment">// 这里出现 error（没有这个函数）</span></span><br><span class="line">&#125;)</span><br><span class="line">  .then(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 一个或多个成功的 promise 处理程序（handler）</span></span><br><span class="line">  &#125;); <span class="comment">// 尾端没有 .catch！</span></span><br></pre></td></tr></table></figure>
+
+<p>如果出现error，promise的状态将变为“rejected”，然后执行应该跳转至最近的rejection处理程序（handler）。但是上面这个例子中并没有这样的处理程序（handler），因此error会“卡住（stuck）”。没有代码来处理它。在实际开发中，就像代码中常规的未处理的error一样，这意味着某些东西出了问题。</p>
+<p>当发生一个常规的错误（error）并且未被<code>try…catch</code>捕获时会发生什么？脚本死了，并在控制台（console）中留下了一个信息。对于在promise中未被处理的rejecttion，也会发生类似的事。</p>
+<p>JavaScript引擎会根据此类rejection，在此种情况下会生成一个全局的error。</p>
+<p>在浏览器中，我们可以使用<code>unhandledrejection</code>事件来捕获这类error：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">&#x27;unhandledrejection&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 这个事件对象有两个特殊的属性：</span></span><br><span class="line">  alert(event.promise); <span class="comment">// [object Promise] - 生成该全局 error 的 promise</span></span><br><span class="line">  alert(event.reason); <span class="comment">// Error: Whoops! - 未处理的 error 对象</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&quot;Whoops!&quot;</span>);</span><br><span class="line">&#125;); <span class="comment">// 没有用来处理 error 的 catch</span></span><br></pre></td></tr></table></figure>
+
+<p>如果出现了一个 error，并且在这儿没有 <code>.catch</code>，那么 <code>unhandledrejection</code> 处理程序（handler）就会被触发，并获取具有 error 相关信息的 <code>event</code> 对象，所以我们就能做一些后续处理了。</p>
+<p>通常此类 error 是无法恢复的，所以我们最好的解决方案是将问题告知用户，并且可以将事件报告给服务器。</p>
+<p>在任何情况下我们都应该有 <code>unhandledrejection</code> 事件处理程序（用于浏览器，以及其他环境的模拟），以跟踪未处理的 error 并告知用户（可能还有我们的服务器）有关信息，以使我们的应用程序永远不会“死掉”。</p>
+<p>摘录于<a target="_blank" rel="noopener" href="https://zh.javascript.info/promise-error-handling">原文链接</a></p>
 
       
     </div>
@@ -187,7 +198,7 @@
       
       
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a></li></ul>
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/" rel="tag">js</a></li></ul>
 	</div>
 
       
@@ -208,11 +219,11 @@
 
 
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-前端跨域" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2021/08/20/hello-world/" class="article-date">
-  	<time datetime="2021-08-20T14:30:09.152Z" itemprop="datePublished">2021-08-20</time>
+      <a href="/2020/11/18/%E5%89%8D%E7%AB%AF%E8%B7%A8%E5%9F%9F/" class="article-date">
+  	<time datetime="2020-11-18T09:07:09.000Z" itemprop="datePublished">2020-11-18</time>
 </a>
     </div>
   
@@ -225,8 +236,8 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/20/hello-world/">
-        Hello World
+      <a class="article-title" href="/2020/11/18/%E5%89%8D%E7%AB%AF%E8%B7%A8%E5%9F%9F/">
+        前端跨域
         
       </a>
     </h1>
@@ -237,19 +248,42 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+        <h1 id="一、跨域出现原因"><a href="#一、跨域出现原因" class="headerlink" title="一、跨域出现原因"></a>一、跨域出现原因</h1><p>出于浏览器的同源策略限制。同源策略是一种约定，它是浏览器最核心也最基本的安全功能，如果缺少了同源策略，则浏览器的正常功能可能都会受到影响。可以说Web是构建在同源策略基础之上的，浏览器只是针对同源策略的一种实现。同源策略会阻止一个域的JavaScript脚本和另外一个域的内容进行交互。所谓同源（即指在同一个域）就是两个页面具有相同的协议（protocol），主机（host），端口号（port）。</p>
+<h1 id="二、跨域定义"><a href="#二、跨域定义" class="headerlink" title="二、跨域定义"></a>二、跨域定义</h1><p>当一个请求url的协议、域名、端口三者之间任意一个与当前页面url不同即为跨域。</p>
+<p>举例来说，<code>http://www.example.com/dir/page.html</code>这个网址，协议是<code>http://</code>，域名是<code>www.example.com</code>，端口是<code>80</code>（默认端口可以省略）。它的同源情况如下。</p>
+<blockquote>
+<ul>
+<li><code>http://www.example.com/dir2/other.html</code>：同源</li>
+<li><code>http://example.com/dir/other.html</code>：不同源（域名不同）</li>
+<li><code>http://v2.www.example.com/dir/other.html</code>：不同源（域名不同）</li>
+<li><code>http://www.example.com:81/dir/other.html</code>：不同源（端口不同）</li>
+</ul>
+</blockquote>
+<h1 id="三、非同源限制"><a href="#三、非同源限制" class="headerlink" title="三、非同源限制"></a>三、非同源限制</h1><ol>
+<li>无法读取Cookie、LocalStorage、IndexedDB</li>
+<li>无法获得DOM</li>
+<li>AJAX请求不能发送</li>
+</ol>
+<h1 id="四、跨域解决方法"><a href="#四、跨域解决方法" class="headerlink" title="四、跨域解决方法"></a>四、跨域解决方法</h1><h3 id="跨域资源分享（CORS）"><a href="#跨域资源分享（CORS）" class="headerlink" title="跨域资源分享（CORS）"></a>跨域资源分享（CORS）</h3><p>浏览器将CORS请求分成两类：简单请求（simple request）和非简单请求（not-so-simple request）。</p>
+<p>只要同时满足以下两大条件，就属于简单请求。</p>
+<blockquote>
+<p>（1) 请求方法是以下三种方法之一：</p>
+<ul>
+<li>HEAD</li>
+<li>GET</li>
+<li>POST</li>
+</ul>
+<p>（2）HTTP的头信息不超出以下几种字段：</p>
+<ul>
+<li>Accept</li>
+<li>Accept-Language</li>
+<li>Content-Language</li>
+<li>Last-Event-ID</li>
+<li>Content-Type：只限于三个值<code>application/x-www-form-urlencoded</code>、<code>multipart/form-data</code>、<code>text/plain</code></li>
+</ul>
+</blockquote>
+<p>这是为了兼容表单（form），因为历史上表单一直可以发出跨域请求。AJAX 的跨域设计就是，只要表单可以发，AJAX 就可以直接发。</p>
+<p>凡是不同时满足上面两个条件，就属于非简单请求。浏览器对这两种请求的处理，是不一样的。</p>
 
       
     </div>
@@ -257,6 +291,10 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+	</div>
+
       
 
       
@@ -275,6 +313,854 @@
 
 
   
+    <article id="post-媒体查询" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/11/01/%E5%AA%92%E4%BD%93%E6%9F%A5%E8%AF%A2/" class="article-date">
+  	<time datetime="2020-11-01T09:07:09.000Z" itemprop="datePublished">2020-11-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/01/%E5%AA%92%E4%BD%93%E6%9F%A5%E8%AF%A2/">
+        媒体查询
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="响应式布局——媒体查询"><a href="#响应式布局——媒体查询" class="headerlink" title="响应式布局——媒体查询"></a>响应式布局——媒体查询</h1><h2 id="响应式布局容器"><a href="#响应式布局容器" class="headerlink" title="响应式布局容器"></a>响应式布局容器</h2><p>响应式需要一个父级做为布局容器，来配合子级元素实现变化效果。</p>
+<p>原理就是在不同屏幕下，通过媒体查询来改变这个布局容器的大小，再改变里面子元素的排列方式和大小，从而实现不同屏幕下，看到不同的页面布局和样式变化。</p>
+<p><strong>一般情况下的响应式尺寸划分</strong></p>
+<ul>
+<li>超小屏幕（手机，小于768px）：设置宽度为100%</li>
+<li>小屏幕（平板，大于等于768px）：设置宽度为750px</li>
+<li>中等屏幕（桌面显示器，大于等于992px）：设置宽度为970px</li>
+<li>大屏幕（大桌面显示器，大于等于1200px）：设置宽度为1170px</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;style type=&quot;text/css&quot;&gt;</span><br><span class="line">    <span class="selector-class">.container</span>&#123;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">        <span class="attribute">background-color</span>: red;</span><br><span class="line">        <span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">max-width</span>: <span class="number">767px</span>)&#123;</span><br><span class="line">        <span class="selector-class">.container</span>&#123;</span><br><span class="line">            <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">min-width</span>: <span class="number">768px</span>)&#123;</span><br><span class="line">        <span class="selector-class">.container</span>&#123;</span><br><span class="line">            <span class="attribute">width</span>: <span class="number">750px</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">min-width</span>: <span class="number">992px</span>)&#123;</span><br><span class="line">        <span class="selector-class">.container</span>&#123;</span><br><span class="line">            <span class="attribute">width</span>: <span class="number">970px</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">min-width</span>: <span class="number">1200px</span>) &#123;</span><br><span class="line">        <span class="selector-class">.container</span>&#123;</span><br><span class="line">            <span class="attribute">width</span>: <span class="number">1170px</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<p>也可通过引入外部css文件时设置</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link href=&quot;style<span class="selector-class">.css</span>&quot; type=&quot;text/css&quot; rel=&quot;stylesheet&quot; media=&quot;only screen and (<span class="attribute">max-width</span>: <span class="number">600px</span>)<span class="string">&quot;&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/" rel="tag">css</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-css常见布局" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/10/10/css%E5%B8%B8%E8%A7%81%E5%B8%83%E5%B1%80/" class="article-date">
+  	<time datetime="2020-10-10T09:07:09.000Z" itemprop="datePublished">2020-10-10</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/10/css%E5%B8%B8%E8%A7%81%E5%B8%83%E5%B1%80/">
+        CSS常见布局
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="CSS常见布局"><a href="#CSS常见布局" class="headerlink" title="CSS常见布局"></a>CSS常见布局</h1><ol>
+<li><h3 id="左列定宽，右列自适应"><a href="#左列定宽，右列自适应" class="headerlink" title="左列定宽，右列自适应"></a>左列定宽，右列自适应</h3><p>浮动</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;left&quot;</span>&gt;</span>left<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;right&quot;</span>&gt;</span>right<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-class">.left</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">background</span>: red;</span></span><br><span class="line"><span class="css">        <span class="attribute">float</span>: left;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.right</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">background</span>: yellow;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>绝对定位</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;left&quot;</span>&gt;</span>left<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;right&quot;</span>&gt;</span>right<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-class">.container</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">100%</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">position</span>: relative;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.left</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">background-color</span>: red;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.right</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">position</span>: absolute;</span></span><br><span class="line"><span class="css">        <span class="attribute">background-color</span>: green;</span></span><br><span class="line"><span class="css">        <span class="attribute">left</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">top</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">right</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>  <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;left&quot;</span>&gt;</span>left<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;right&quot;</span>&gt;</span>right<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-class">.container</span>&#123;</span></span><br><span class="line"><span class="css">    	<span class="attribute">width</span>: <span class="number">100%</span>;</span></span><br><span class="line"><span class="css">    	<span class="attribute">position</span>: relative;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.left</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">background</span>: red;</span></span><br><span class="line"><span class="css">        <span class="attribute">position</span>:absolute;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.right</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">margin-left</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">background</span>: green;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>flex</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;left&quot;</span>&gt;</span>left<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;right&quot;</span>&gt;</span>right<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-class">.container</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">display</span>: flex;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.left</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">background-color</span>: red;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.right</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">flex</span>: <span class="number">1</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">background-color</span>: green;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<ol start="2">
+<li><h3 id="两栏定宽，中栏自适应"><a href="#两栏定宽，中栏自适应" class="headerlink" title="两栏定宽，中栏自适应"></a>两栏定宽，中栏自适应</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;left&quot;</span>&gt;</span>left<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;right&quot;</span>&gt;</span>right<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>middle<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-class">.left</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">float</span>: left;</span></span><br><span class="line"><span class="css">        <span class="attribute">background-color</span>: red;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.right</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">float</span>: right;</span></span><br><span class="line"><span class="css">        <span class="attribute">background-color</span>: red;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.middle</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">margin</span>: <span class="number">0</span> auto;</span></span><br><span class="line"><span class="css">        <span class="attribute">background-color</span>: green;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>flex</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;left&quot;</span>&gt;</span>left<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>middle<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;right&quot;</span>&gt;</span>right<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-class">.container</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">display</span>: flex;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.left</span>,<span class="selector-class">.right</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">background-color</span>: red;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.middle</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">flex</span>: <span class="number">1</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">background-color</span>: green;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><h3 id="右侧定宽，左侧自适应"><a href="#右侧定宽，左侧自适应" class="headerlink" title="右侧定宽，左侧自适应"></a>右侧定宽，左侧自适应</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;right&quot;</span>&gt;</span>right<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;left&quot;</span>&gt;</span>left<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-class">.left</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">margin-right</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">background-color</span>: green;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.right</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">background-color</span>: red;</span></span><br><span class="line"><span class="css">        <span class="attribute">float</span>: right;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>flex</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;left&quot;</span>&gt;</span>left<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;right&quot;</span>&gt;</span>right<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-class">.container</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">display</span>: flex;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.left</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">flex</span>: <span class="number">1</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">background-color</span>: green;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.right</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">background-color</span>: red;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><h3 id="上中下，左中右"><a href="#上中下，左中右" class="headerlink" title="上中下，左中右"></a>上中下，左中右</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;top&quot;</span>&gt;</span>top<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;center&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;left&quot;</span>&gt;</span>left<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;right&quot;</span>&gt;</span>right<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>middle<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;bottom&quot;</span>&gt;</span>bottom<span class="tag">&lt;/<span class="name">div</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-class">.top</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">position</span>: absolute;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">100%</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">height</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">top</span>:<span class="number">0</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">left</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">right</span>:<span class="number">0</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">background</span>: red;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.center</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">position</span>: absolute;</span></span><br><span class="line"><span class="css">        <span class="attribute">top</span>:<span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">bottom</span>:<span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">100%</span>px;</span></span><br><span class="line"><span class="css">        <span class="attribute">height</span>: auto;</span></span><br><span class="line"><span class="css">        <span class="attribute">left</span>:<span class="number">0</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">right</span>:<span class="number">0</span>;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.left</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">height</span>:<span class="number">100%</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">background</span>: green;</span></span><br><span class="line"><span class="css">        <span class="attribute">float</span>: left;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.right</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">height</span>:<span class="number">100%</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">background</span>:green;</span></span><br><span class="line"><span class="css">        <span class="attribute">float</span>: right;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.middle</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">margin</span>: <span class="number">0</span> <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">height</span>:<span class="number">100%</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">background</span>:yellow;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.bottom</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">position</span>:absolute;</span></span><br><span class="line"><span class="css">        <span class="attribute">bottom</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">left</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">right</span>:<span class="number">0</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">height</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">100%</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">background</span>: red;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>flex</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;top&quot;</span>&gt;</span>top<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;center&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;left&quot;</span>&gt;</span>left<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>middle<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;right&quot;</span>&gt;</span>right<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;bottom&quot;</span>&gt;</span>bottom<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-tag">body</span>,<span class="selector-tag">html</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">height</span>: <span class="number">100%</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">font-size</span>:<span class="number">10px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">padding</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">margin</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.container</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">display</span>: flex;</span></span><br><span class="line"><span class="css">        <span class="attribute">flex-direction</span>: column;</span></span><br><span class="line"><span class="css">        <span class="attribute">height</span>: <span class="number">100%</span>;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.top</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">100%</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">height</span>:<span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">background</span>: red;</span></span><br><span class="line"><span class="css">        <span class="attribute">font-size</span>: <span class="number">2rem</span>;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.center</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">display</span>: flex;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">100%</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">flex</span>: <span class="number">1</span>;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.left</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">background</span>: green;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.middle</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">flex</span>: <span class="number">1</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">background</span>: yellow;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.right</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">background</span>: green;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.bottom</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">100%</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">height</span>:<span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">background</span>: red;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><h3 id="元素居中"><a href="#元素居中" class="headerlink" title="元素居中"></a>元素居中</h3><p>已知宽高</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-class">.container</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">400px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">height</span>: <span class="number">400px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">position</span>: relative;</span></span><br><span class="line"><span class="css">        <span class="attribute">background-color</span>: red;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.box</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">height</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">position</span>: absolute;</span></span><br><span class="line"><span class="css">        <span class="attribute">background-color</span>: green;</span></span><br><span class="line"><span class="css">        <span class="attribute">left</span>: <span class="number">50%</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">top</span>: <span class="number">50%</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">margin-left</span>: -<span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">margin-top</span>: -<span class="number">100px</span>;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>未知宽高</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-class">.container</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">400px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">height</span>: <span class="number">400px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">position</span>: relative;</span></span><br><span class="line"><span class="css">        <span class="attribute">background-color</span>: red;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.box</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">height</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">position</span>: absolute;</span></span><br><span class="line"><span class="css">        <span class="attribute">background-color</span>: green;</span></span><br><span class="line"><span class="css">        <span class="attribute">left</span>: <span class="number">50%</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">top</span>: <span class="number">50%</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(-<span class="number">50%</span>, -<span class="number">50%</span>);</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>flex</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-class">.container</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">400px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">height</span>: <span class="number">400px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">display</span>: flex;</span></span><br><span class="line"><span class="css">        <span class="attribute">justify-content</span>: center;</span></span><br><span class="line"><span class="css">        <span class="attribute">align-items</span>: center;</span></span><br><span class="line"><span class="css">        <span class="attribute">background-color</span>: red;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.box</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">height</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">background-color</span>: green;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>或：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">400px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">400px</span>;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">justify-content</span>:center;</span><br><span class="line">    <span class="attribute">background-color</span>: red;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box</span>&#123;</span><br><span class="line">    <span class="attribute">align-self</span>: center;</span><br><span class="line">    <span class="attribute">background-color</span>: green;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>或</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">400px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">400px</span>;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">background-color</span>: red;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: green;</span><br><span class="line">    <span class="attribute">margin</span>: auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/" rel="tag">css</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-几种自适应布局" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/10/03/%E5%87%A0%E7%A7%8D%E8%87%AA%E9%80%82%E5%BA%94%E5%B8%83%E5%B1%80/" class="article-date">
+  	<time datetime="2020-10-03T09:07:09.000Z" itemprop="datePublished">2020-10-03</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/03/%E5%87%A0%E7%A7%8D%E8%87%AA%E9%80%82%E5%BA%94%E5%B8%83%E5%B1%80/">
+        几种自适应布局
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="常见自适应布局"><a href="#常见自适应布局" class="headerlink" title="常见自适应布局"></a>常见自适应布局</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;left&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;right&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="左侧固定宽度，右侧自适应布局"><a href="#左侧固定宽度，右侧自适应布局" class="headerlink" title="左侧固定宽度，右侧自适应布局"></a>左侧固定宽度，右侧自适应布局</h3><p>方法一：</p>
+<p>左侧盒子使用float浮动，固定宽度，右侧盒子设置margin-left控制与左侧的距离：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.left</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">float</span>: left;</span><br><span class="line">    <span class="attribute">background-color</span>: skyblue;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.right</span>&#123;</span><br><span class="line">    <span class="attribute">background-color</span>: yellow;</span><br><span class="line">    <span class="attribute">margin-left</span>: <span class="number">200px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>方法二：</p>
+<p>左侧盒子使用绝对定位absolute；固定宽度，右侧盒子设置margin-left控制与左侧的距离：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.left</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: skyblue;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.right</span>&#123;</span><br><span class="line">    <span class="attribute">background-color</span>: yellow;</span><br><span class="line">    <span class="attribute">margin-left</span>: <span class="number">200px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="左侧自适应，右侧固定宽度"><a href="#左侧自适应，右侧固定宽度" class="headerlink" title="左侧自适应，右侧固定宽度"></a>左侧自适应，右侧固定宽度</h3><p>方法一：</p>
+<p>左侧盒子左浮动，margin-right为负值，值为右边距==右侧层的宽度的负值（左侧撑开，使得两个盒子共行）， 右侧盒子右浮动，固定宽度</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.left</span>&#123;</span><br><span class="line">    <span class="attribute">float</span>: left;</span><br><span class="line">    <span class="attribute">background-color</span>: skyblue;</span><br><span class="line">    <span class="attribute">margin-right</span>: -<span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.right</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">float</span>: right;</span><br><span class="line">    <span class="attribute">background-color</span>: yellow;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>方法二：</p>
+<p>左侧右侧都使用绝对定位，右侧固定宽度，父级设置相对定位：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span>&#123;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.left</span>&#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">right</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">width</span>: auto;</span><br><span class="line">    <span class="attribute">background-color</span>: skyblue;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.right</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: yellow;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="左右两侧宽度固定，中间自适应"><a href="#左右两侧宽度固定，中间自适应" class="headerlink" title="左右两侧宽度固定，中间自适应"></a>左右两侧宽度固定，中间自适应</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;center&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;left&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;right&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.left</span>,<span class="selector-class">.center</span>,<span class="selector-class">.right</span>&#123;</span><br><span class="line">    <span class="attribute">float</span>: left;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.center</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: greenyellow;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.left</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: skyblue;</span><br><span class="line">    <span class="attribute">margin-left</span>: -<span class="number">100%</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.right</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">    <span class="attribute">margin-left</span>: -<span class="number">300px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: yellow;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/" rel="tag">css</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-node异步编程" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/09/27/node%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/" class="article-date">
+  	<time datetime="2020-09-27T09:07:09.000Z" itemprop="datePublished">2020-09-27</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/27/node%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/">
+        node异步编程
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Node-js异步编程"><a href="#Node-js异步编程" class="headerlink" title="Node.js异步编程"></a>Node.js异步编程</h3><h4 id="同步API，异步API"><a href="#同步API，异步API" class="headerlink" title="同步API，异步API"></a>同步API，异步API</h4><p>同步API：只有当前API执行完成后，才能继续执行下一个API</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;before&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;after&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>异步API：当前API的执行不会阻塞后续代码的执行</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;before&#x27;</span>);</span><br><span class="line"><span class="built_in">setTimeout</span>(</span><br><span class="line">	<span class="function">() =&gt;</span> &#123;<span class="built_in">console</span>.log(<span class="string">&#x27;last&#x27;</span>);</span><br><span class="line">&#125;,<span class="number">2000</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;after&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>区别</strong>：</p>
+<ul>
+<li>同步API可以从返回值中拿到API执行的结果，但是异步API是不可以的</li>
+<li>同步API从上到下依次执行，前面代码会阻塞后面代码的执行；异步API不会等待API执行完后再向下执行代码（node不会从上到下依次执行代码，而是先将同步API执行完再去执行异步API）</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//同步</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">n1,n2</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> n1 + n2;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> result = sum (<span class="number">10</span> , <span class="number">20</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//异步</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getMsg</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> &#123; <span class="attr">msg</span>: <span class="string">&#x27;Hello Node.js&#x27;</span>&#125;</span><br><span class="line">	&#125;,<span class="number">2000</span>);</span><br><span class="line">	<span class="comment">//return undefined;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> msg = getMsg();</span><br><span class="line"><span class="built_in">console</span>.log(msg);		<span class="comment">//undefined，异步不会阻塞后面代码的运行</span></span><br></pre></td></tr></table></figure>
+
+<p>那么要怎么取到异步API的返回值呢？</p>
+<h4 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h4><p>自己定义函数让别人去调用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//getData函数定义</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getData</span>(<span class="params">callback</span>)</span>&#123;&#125;</span><br><span class="line"><span class="comment">//getData函数调用</span></span><br><span class="line">getData (<span class="function">() =&gt;</span> &#123;&#125;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getMsg</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		callback(&#123;</span><br><span class="line">			<span class="attr">msg</span>: <span class="string">&#x27;Hello Node.js&#x27;</span></span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;,<span class="number">2000</span>)</span><br><span class="line">&#125;</span><br><span class="line">getMsg(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(data);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//异步API不能通过return获取到返回结果，而是需要通过回调函数来获取</span></span><br></pre></td></tr></table></figure>
+
+<p>如果异步API后面的执行依赖当前异步API 的执行结果，但实际上后续代码在执行的时候异步API还没有返回结果，这个问题要怎么解决呢？</p>
+<p>假如需要依次读取三个文件A，B，C</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">fs.readFile(&#x27;./1.txt&#x27;,(err,res1)=&gt;&#123;</span><br><span class="line">	console.log(res1)</span><br><span class="line">	fs.readFile(&#x27;./2.txt&#x27;,(err,res2)=&gt;&#123;</span><br><span class="line">		console.log(res2)</span><br><span class="line">		fs.readFile(&#x27;./3.txt&#x27;,(err,res3)=&gt;&#123;</span><br><span class="line">			console.log(res3)</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>功能实现了但是不利于阅读和维护，写出<strong>回调地狱</strong></p>
+<blockquote>
+<p>回调地狱根本问题是：</p>
+<ol>
+<li>嵌套函数存在耦合性，一旦有所改动，就会牵一发而动全身</li>
+<li>嵌套函数多了就很难处理错误</li>
+</ol>
+</blockquote>
+<h4 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h4><p>Promise出现的目的是解决Node.js异步编程中回调地狱的问题。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//resolve将异步的结果通过参数的形式传递出去</span></span><br><span class="line">    <span class="comment">//reject将失败的结果传递出去</span></span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">      resolve(&#123; <span class="attr">name</span>: <span class="string">&quot;张三&quot;</span> &#125;);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      reject(<span class="string">&quot;失败了&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, <span class="number">2000</span>);</span><br><span class="line">&#125;);</span><br><span class="line">promise</span><br><span class="line">  .then(<span class="function">(<span class="params">result</span>) =&gt;</span> <span class="built_in">console</span>.log(result))</span><br><span class="line">  .catch(<span class="function">(<span class="params">error</span>) =&gt;</span> <span class="built_in">console</span>.log(error));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  fs.readFile(<span class="string">&quot;./1.txt&quot;</span>, <span class="string">&quot;utf8&quot;</span>, <span class="function">(<span class="params">error, result</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (error != <span class="literal">null</span>) &#123;</span><br><span class="line">      reject(error);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      resolve(result);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">promise</span><br><span class="line">  .then(<span class="function">(<span class="params">result</span>) =&gt;</span> <span class="built_in">console</span>.log(result))</span><br><span class="line">  .catch(<span class="function">(<span class="params">error</span>) =&gt;</span> <span class="built_in">console</span>.log(error));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>解决上述回调地狱问题：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">p1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    fs.readFile(<span class="string">&quot;./1.txt&quot;</span>, <span class="string">&quot;utf8&quot;</span>, <span class="function">(<span class="params">error, result</span>) =&gt;</span> &#123;</span><br><span class="line">      resolve(result);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">p2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    fs.readFile(<span class="string">&quot;./2.txt&quot;</span>, <span class="string">&quot;utf8&quot;</span>, <span class="function">(<span class="params">error, result</span>) =&gt;</span> &#123;</span><br><span class="line">      resolve(result);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">p3</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    fs.readFile(<span class="string">&quot;./3.txt&quot;</span>, <span class="string">&quot;utf8&quot;</span>, <span class="function">(<span class="params">error, result</span>) =&gt;</span> &#123;</span><br><span class="line">      resolve(result);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line">p1()</span><br><span class="line">  .then(<span class="function">(<span class="params">r1</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(r1);</span><br><span class="line">    <span class="keyword">return</span> p2();</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function">(<span class="params">r2</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(r2);</span><br><span class="line">    <span class="keyword">return</span> p3();</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function">(<span class="params">r3</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(r3);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="异步函数"><a href="#异步函数" class="headerlink" title="异步函数"></a>异步函数</h4><p>异步函数是异步编程语法的终极解决方案，它可以让我们将异步代码写成同步的形式，让代码不再有回调函数嵌套，使代码变得清晰明了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fn = <span class="keyword">async</span> () =&gt; &#123;&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)</span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">async function fn()&#123;</span><br><span class="line">	throw &#x27;出错了&#x27;;</span><br><span class="line">	return 123;</span><br><span class="line">&#125;</span><br><span class="line">fn().then(data =&gt; console.log(data))</span><br><span class="line">	.catch(err =&gt; console.log(err))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">async function p1()&#123;</span><br><span class="line">	return &#x27;p1&#x27;;</span><br><span class="line">&#125;</span><br><span class="line">async function p2()&#123;</span><br><span class="line">	return &#x27;p2&#x27;;</span><br><span class="line">&#125;</span><br><span class="line">async function p3()&#123;</span><br><span class="line">	return &#x27;p3&#x27;;</span><br><span class="line">&#125;</span><br><span class="line">async function run()&#123;</span><br><span class="line">	let r1 = await p1()</span><br><span class="line">	let r2 = await p2()</span><br><span class="line">	let r3 = await p3()</span><br><span class="line">	console.log(r1)</span><br><span class="line">	console.log(r2)</span><br><span class="line">	console.log(r3)</span><br><span class="line">&#125;</span><br><span class="line">run();</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="async关键字"><a href="#async关键字" class="headerlink" title="async关键字"></a>async关键字</h5><ol>
+<li>普通函数定义前加async关键字，普通函数变成异步函数</li>
+<li>异步函数默认返回promise对象</li>
+<li>在异步函数内部使用return关键字进行结果返回，结果会被包裹在promise对象中，return关键字代替了resolve方法</li>
+<li>在异步函数内部使用throw关键字抛出程序异常</li>
+<li>调用异步函数再链式调用then方法获取异步函数执行结果</li>
+<li>调用异步函数再链式调用catch方法获取异步函数执行的错误信息</li>
+</ol>
+<h5 id="await关键字"><a href="#await关键字" class="headerlink" title="await关键字"></a>await关键字</h5><ol>
+<li>await关键字只能出现在异步函数中</li>
+<li>await promise await后面只能写promise对象，写其他类型的API是不可以的</li>
+<li>await关键字可暂停异步函数向下执行，直到promise返回结果</li>
+</ol>
+<p>解决回调地狱，读取文件方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>);</span><br><span class="line"><span class="comment">//改造现有异步函数api，让其返回promise对象，从而支持异步函数语法</span></span><br><span class="line"><span class="keyword">const</span> promisify = <span class="built_in">require</span>(<span class="string">&quot;util&quot;</span>).promisify;</span><br><span class="line"><span class="comment">//调用promisify方法改造现有异步API，让其返回promise对象</span></span><br><span class="line"><span class="keyword">const</span> readFile = promisify(fs.readFile);</span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> r1 = <span class="keyword">await</span> readFile(<span class="string">&quot;./1.txt&quot;</span>, <span class="string">&quot;utf8&quot;</span>);</span><br><span class="line">  <span class="keyword">let</span> r2 = <span class="keyword">await</span> readFile(<span class="string">&quot;./2.txt&quot;</span>, <span class="string">&quot;utf8&quot;</span>);</span><br><span class="line">  <span class="keyword">let</span> r3 = <span class="keyword">await</span> readFile(<span class="string">&quot;./3.txt&quot;</span>, <span class="string">&quot;utf8&quot;</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(r1);</span><br><span class="line">  <span class="built_in">console</span>.log(r2);</span><br><span class="line">  <span class="built_in">console</span>.log(r3);</span><br><span class="line">&#125;</span><br><span class="line">run();</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node/" rel="tag">node</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-node数据库" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/09/23/node%E6%95%B0%E6%8D%AE%E5%BA%93/" class="article-date">
+  	<time datetime="2020-09-23T09:07:09.000Z" itemprop="datePublished">2020-09-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/23/node%E6%95%B0%E6%8D%AE%E5%BA%93/">
+        node数据库
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="MongoDB增删改查操作"><a href="#MongoDB增删改查操作" class="headerlink" title="MongoDB增删改查操作"></a>MongoDB增删改查操作</h1><h3 id="MongoDB数据库服务启动和关闭"><a href="#MongoDB数据库服务启动和关闭" class="headerlink" title="MongoDB数据库服务启动和关闭"></a>MongoDB数据库服务启动和关闭</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">net start mongodb</span><br><span class="line">net stop mongodb</span><br></pre></td></tr></table></figure>
+
+<h3 id="数据库连接"><a href="#数据库连接" class="headerlink" title="数据库连接"></a>数据库连接</h3><p>先使用npm install mongoose安装mongoose依赖，之后使用mongoose提供的connect方法即可连接数据库。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mongoose = <span class="built_in">require</span>(<span class="string">&quot;mongoose&quot;</span>);</span><br><span class="line"></span><br><span class="line">mongoose</span><br><span class="line">  .connect(<span class="string">&quot;mongodb://localhost/test&quot;</span>)</span><br><span class="line">  .then(<span class="function">() =&gt;</span> <span class="built_in">console</span>.log(<span class="string">&quot;数据库连接成功&quot;</span>))</span><br><span class="line">  .catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;数据库连接失败&quot;</span>);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>ps：创建的数据库名字如果不存在，MongoDB会自动创建</p>
+<h3 id="创建集合"><a href="#创建集合" class="headerlink" title="创建集合"></a>创建集合</h3><p>分为两步，</p>
+<ol>
+<li>对集合设定规则</li>
+<li>创建集合，创建mongoose.Schema构造函数的实例即可创建集合</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//设定集合规则</span><br><span class="line">const personSchema = new mongoose.Schema(&#123;</span><br><span class="line">  name: String,</span><br><span class="line">  age: Number,</span><br><span class="line">&#125;);</span><br><span class="line">创建集合并应用规则</span><br><span class="line">const Person = mongoose.model(&quot;Person&quot;, personSchema); //数据库实际名称为persons</span><br></pre></td></tr></table></figure>
+
+<p>ps：刚创建好的集合在MongoDB Compass里面无法看到，是因为里面没有插入数据</p>
+<h3 id="创建文档"><a href="#创建文档" class="headerlink" title="创建文档"></a>创建文档</h3><p>创建文档实际上就是<strong>向集合中插入数据</strong></p>
+<p>分为两步，</p>
+<ol>
+<li>创建集合实例</li>
+<li>调用实例对象下的save方法将数据保存到数据库中</li>
+</ol>
+<p>方法一：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建文档</span></span><br><span class="line"><span class="keyword">const</span> person = <span class="keyword">new</span> Person(&#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&quot;张三&quot;</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="number">20</span>,</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//将文档插入到数据库中</span></span><br><span class="line">person.save();</span><br></pre></td></tr></table></figure>
+
+<p>方法二：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Person.create(&#123; <span class="attr">name</span>: <span class="string">&quot;李四&quot;</span>, <span class="attr">age</span>: <span class="number">19</span> &#125;, <span class="function">(<span class="params">err, doc</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">//错误对象</span></span><br><span class="line">  <span class="built_in">console</span>.log(err);</span><br><span class="line">  <span class="comment">//当前插入的文档</span></span><br><span class="line">  <span class="built_in">console</span>.log(doc);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Person.create(&#123; <span class="attr">name</span>: <span class="string">&quot;王五&quot;</span>, <span class="attr">age</span>: <span class="number">18</span> &#125;)</span><br><span class="line">  .then(<span class="function">(<span class="params">doc</span>) =&gt;</span> <span class="built_in">console</span>.log(doc))</span><br><span class="line">  .catch(<span class="function">(<span class="params">err</span>) =&gt;</span> <span class="built_in">console</span>.log(err));</span><br></pre></td></tr></table></figure>
+
+<h3 id="mongoDB数据库导入数据"><a href="#mongoDB数据库导入数据" class="headerlink" title="mongoDB数据库导入数据"></a>mongoDB数据库导入数据</h3><p>mongoimport -d 数据库名称 -c 集合名称 -file 要导入的数据文件</p>
+<p><strong>注</strong>：mongoimport在使用之前需要先找到MongoDB安装目录bin目录下的mongoimport.exe所在的文件目录位置，将其添加到环境变量中即可使用</p>
+<h3 id="查询文档"><a href="#查询文档" class="headerlink" title="查询文档"></a>查询文档</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//根据条件查找文档（条件为空则查找所有文档）</span></span><br><span class="line">Person.find(&#123; <span class="attr">name</span>: <span class="string">&quot;张三&quot;</span> &#125;).then(<span class="function">(<span class="params">result</span>) =&gt;</span> <span class="built_in">console</span>.log(result));</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//返回文档集合</span></span><br><span class="line">[&#123; </span><br><span class="line">	_id: <span class="number">5</span>f7a72120398013a3c338112, </span><br><span class="line">	name: &#x27;张三&#x27;, </span><br><span class="line">	age: <span class="number">20</span>, </span><br><span class="line">	__v: <span class="number">0</span> </span><br><span class="line">&#125;]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//根据条件查找文档</span></span><br><span class="line">Person.findOne(&#123; <span class="attr">name</span>: <span class="string">&quot;李四&quot;</span> &#125;).then(<span class="function">(<span class="params">result</span>) =&gt;</span> <span class="built_in">console</span>.log(result));</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//返回文档集合</span></span><br><span class="line">&#123; </span><br><span class="line">	_id: <span class="number">5</span>f7a75a84187ba391091e3dc, </span><br><span class="line">	name: &#x27;李四&#x27;, </span><br><span class="line">	age: <span class="number">19</span>, </span><br><span class="line">	__v: <span class="number">0</span> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>两者的区别是，不管结果如何，find返回的都是一组文档，而findOne返回的都是一个文档</p>
+<p><strong>特殊的查询</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//匹配大于 小于</span></span><br><span class="line">Person.find(&#123;<span class="attr">age</span>: &#123;<span class="attr">$gt</span>: <span class="number">18</span>, <span class="attr">$lt</span>: <span class="number">20</span>&#125;&#125;).then(<span class="function"><span class="params">result</span>=&gt;</span><span class="built_in">console</span>.log(result))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//匹配包含，可以查询到文档数组里包含的信息</span></span><br><span class="line">Person.find(&#123;<span class="attr">hobbies</span>: &#123;<span class="attr">$in</span>: [<span class="string">&#x27;打篮球&#x27;</span>]&#125;&#125;).then(<span class="function"><span class="params">result</span>=&gt;</span><span class="built_in">console</span>.log(result))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//选择要查询的字段</span></span><br><span class="line">Person.find().select(<span class="string">&#x27;name age -_id&#x27;</span>).then(<span class="function"><span class="params">result</span>=&gt;</span><span class="built_in">console</span>.log(result))</span><br><span class="line"><span class="comment">//不想查询的字段在前面加个&#x27;-&#x27;则不显示</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//将数据按照年龄进行升序排序</span></span><br><span class="line">Person.find().sort(<span class="string">&#x27;age&#x27;</span>).then(<span class="function"><span class="params">result</span>=&gt;</span><span class="built_in">console</span>.log(result))</span><br><span class="line"><span class="comment">//将数据按照年龄进行降序排序</span></span><br><span class="line">Person.find().sort(<span class="string">&#x27;-age&#x27;</span>).then(<span class="function"><span class="params">result</span>=&gt;</span><span class="built_in">console</span>.log(result))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//skip跳过多少条数据，limit限制查询数量</span></span><br><span class="line">Person.find().skip(<span class="number">2</span>).limit(<span class="number">2</span>).then(<span class="function"><span class="params">result</span>=&gt;</span><span class="built_in">console</span>.log(result))</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除文档"><a href="#删除文档" class="headerlink" title="删除文档"></a>删除文档</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//查询到一条文档并且删除</span></span><br><span class="line"><span class="comment">//返回删除的文档</span></span><br><span class="line"><span class="comment">//如果查询条件匹配了多个文档，那么将会删除第一个文档</span></span><br><span class="line">Person.findOneAndDelete(&#123;&#125;).then(<span class="function"><span class="params">result</span>=&gt;</span><span class="built_in">console</span>.log(result))</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//删除多个</span></span><br><span class="line"><span class="comment">//返回删除的文档数目以及ok字段</span></span><br><span class="line">Person.deleteMany(&#123;&#125;).then(<span class="function"><span class="params">result</span>=&gt;</span><span class="built_in">console</span>.log(result))</span><br></pre></td></tr></table></figure>
+
+<h3 id="更新文档"><a href="#更新文档" class="headerlink" title="更新文档"></a>更新文档</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//更新集合中的文档（更新一个）</span></span><br><span class="line">Person.updateOne(&#123;查询条件&#125;,&#123;要修改的值&#125;).then(<span class="function"><span class="params">result</span>=&gt;</span><span class="built_in">console</span>.log(result))</span><br><span class="line"><span class="comment">//例</span></span><br><span class="line">Person.updateOne(&#123;<span class="attr">name</span>: <span class="string">&#x27;张三&#x27;</span>&#125;,&#123;<span class="attr">name</span>: <span class="string">&#x27;张三丰&#x27;</span>&#125;).then(<span class="function"><span class="params">result</span>=&gt;</span><span class="built_in">console</span>.log(result))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//更新集合中的文档（更新多个）</span></span><br><span class="line"><span class="comment">//若查询条件为空，则更新所有值</span></span><br><span class="line">Person.updateMany(&#123;查询条件&#125;,&#123;要修改的值&#125;).then(<span class="function"><span class="params">result</span>=&gt;</span><span class="built_in">console</span>.log(result))</span><br><span class="line"><span class="comment">//例</span></span><br><span class="line">Person.updateMany(&#123;&#125;,&#123;<span class="attr">age</span>: <span class="number">18</span>&#125;).then(<span class="function"><span class="params">result</span>=&gt;</span><span class="built_in">console</span>.log(result))</span><br></pre></td></tr></table></figure>
+
+<h3 id="mongoose验证"><a href="#mongoose验证" class="headerlink" title="mongoose验证"></a>mongoose验证</h3><p>在创建集合规则时，可以设置当前字段的验证规则，验证失败就输入插入失败</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">const personSchema = new mongoose.Schema(&#123;</span><br><span class="line">	title: &#123;</span><br><span class="line">		type: String,</span><br><span class="line">		//必选字段</span><br><span class="line">		required: [true, &#x27;请输入文章标题&#x27;],</span><br><span class="line">		//字符串最小长度</span><br><span class="line">		minlength: [2, &#x27;文章长度不能小于2&#x27;],</span><br><span class="line">		//字符串最大长度</span><br><span class="line">		maxlength: [5, &#x27;文章长度不能大于5&#x27;],</span><br><span class="line">		//去除字符串两边空格</span><br><span class="line">		trim: true</span><br><span class="line">	&#125;,</span><br><span class="line">	age: &#123;</span><br><span class="line">		type: Number,</span><br><span class="line">		//数字的最小范围</span><br><span class="line">		min: 18,</span><br><span class="line">		max: 100</span><br><span class="line">	&#125;,</span><br><span class="line">	date: &#123;</span><br><span class="line">		type: Date,</span><br><span class="line">		//默认值</span><br><span class="line">		default: Date.now</span><br><span class="line">	&#125;,</span><br><span class="line">	category: &#123;</span><br><span class="line">		type: String,</span><br><span class="line">		//枚举，列举出当前字段可以拥有的值</span><br><span class="line">		enum: &#123;</span><br><span class="line">			values: [&#x27;html&#x27;, &#x27;css&#x27;, &#x27;javascript&#x27;],</span><br><span class="line">			message: &#x27;分类的名称要在一定的范围内才可以&#x27;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">	author: &#123;</span><br><span class="line">		type: String,</span><br><span class="line">		//自定义验证器</span><br><span class="line">		validate: &#123;</span><br><span class="line">			validator: v =&gt; &#123;</span><br><span class="line">				//返回布尔值</span><br><span class="line">				//true验证成功，false验证失败</span><br><span class="line">				//v是要验证的值</span><br><span class="line">				return v &amp;&amp; v.length&gt; 4</span><br><span class="line">			&#125;,</span><br><span class="line">			//自定义错误信息</span><br><span class="line">			message: &#x27;传入的值不符合验证规则&#x27;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>打印不符合验证规则的信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Person.create()</span><br><span class="line">	  .then(result =&gt; console.log(result))</span><br><span class="line">	  .catch(error =&gt; &#123;</span><br><span class="line">	  	//获取错误信息对象</span><br><span class="line">	  	const err = error.errors;</span><br><span class="line">	  	//循环错误信息对象</span><br><span class="line">	  	for(var i in err)&#123;</span><br><span class="line">	  		//将错误信息打印到控制台中</span><br><span class="line">	  		console.log(err[i][&#x27;message&#x27;])</span><br><span class="line">	  	&#125;</span><br><span class="line">	  &#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="集合关联"><a href="#集合关联" class="headerlink" title="集合关联"></a>集合关联</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//用户集合规则</span></span><br><span class="line"><span class="keyword">const</span> userSchema = <span class="keyword">new</span> mongoose.Schema(&#123;</span><br><span class="line">	<span class="attr">name</span>: &#123;</span><br><span class="line">		<span class="attr">type</span>: <span class="built_in">String</span>,</span><br><span class="line">		<span class="attr">required</span>: <span class="literal">true</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//文章集合规则</span></span><br><span class="line"><span class="keyword">const</span> postSchema = <span class="keyword">new</span> mongoose.Schema(&#123;</span><br><span class="line">	<span class="attr">title</span>: &#123;</span><br><span class="line">		<span class="attr">type</span>: <span class="built_in">String</span></span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="attr">author</span>: &#123;</span><br><span class="line">		<span class="attr">type</span>:mongoose.Schema.Types.ObjectId，</span><br><span class="line">		<span class="comment">//关联用户集合</span></span><br><span class="line">		<span class="attr">ref</span>: <span class="string">&#x27;User&#x27;</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//用户集合</span></span><br><span class="line"><span class="keyword">const</span> User = mongoose.model(<span class="string">&#x27;User&#x27;</span>, userSchema)</span><br><span class="line"><span class="comment">//文章集合</span></span><br><span class="line"><span class="keyword">const</span> Post = mongoose.model(<span class="string">&#x27;Post&#x27;</span>, postSchema)</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建用户</span></span><br><span class="line">User.create(&#123;<span class="attr">name</span>: <span class="string">&#x27;张三&#x27;</span>&#125;).then(<span class="function"><span class="params">result</span> =&gt;</span> <span class="built_in">console</span>.log(result))</span><br><span class="line"><span class="comment">//创建文章</span></span><br><span class="line">Post.create(&#123;<span class="attr">title</span>: <span class="string">&#x27;test&#x27;</span>, <span class="attr">author</span>: <span class="string">&#x27;5f7a72120398013a3c338112&#x27;</span>&#125;).then(<span class="function"><span class="params">result</span> =&gt;</span> <span class="built_in">console</span>.log(result))</span><br><span class="line">Post.find().populate(<span class="string">&#x27;author&#x27;</span>).then(<span class="function"><span class="params">result</span> =&gt;</span> <span class="built_in">console</span>.log(result))</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node/" rel="tag">node</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-node模块化" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/09/20/node%E6%A8%A1%E5%9D%97%E5%8C%96/" class="article-date">
+  	<time datetime="2020-09-20T09:07:09.000Z" itemprop="datePublished">2020-09-20</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/20/node%E6%A8%A1%E5%9D%97%E5%8C%96/">
+        node模块化
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="模块化开发"><a href="#模块化开发" class="headerlink" title="模块化开发"></a>模块化开发</h3><h5 id="exports对象和module-exports对象的区别？"><a href="#exports对象和module-exports对象的区别？" class="headerlink" title="exports对象和module.exports对象的区别？"></a>exports对象和module.exports对象的区别？</h5><p>exports对象一般情况下是和module.exports对象等价，</p>
+<p>但是当</p>
+<p>exports对象和module.exports对象指向的不是同一个对象时，以module.exports为准。</p>
+<h3 id="系统模块fs文件操作"><a href="#系统模块fs文件操作" class="headerlink" title="系统模块fs文件操作"></a>系统模块fs文件操作</h3><h4 id="读取文件"><a href="#读取文件" class="headerlink" title="读取文件"></a>读取文件</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.通过模块的名字fs对模块进行引用</span></span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&quot;path&quot;</span>);</span><br><span class="line"><span class="comment">//2.通过模块内部的readFile读取文件内容</span></span><br><span class="line">fs.readFile(path.join(__dirname, <span class="string">&quot;./module-a.js&quot;</span>), <span class="string">&quot;utf8&quot;</span>, <span class="function">(<span class="params">err, doc</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">//如果文件读取出错err是一个对象，包含错误信息</span></span><br><span class="line">  <span class="comment">//如果文件读取正确 err是null</span></span><br><span class="line">  <span class="comment">//doc是文件读取结果</span></span><br><span class="line">  <span class="comment">//   console.log(err);</span></span><br><span class="line">  <span class="keyword">if</span> (err == <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(doc);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="写入文件"><a href="#写入文件" class="headerlink" title="写入文件"></a>写入文件</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>);</span><br><span class="line"></span><br><span class="line">fs.writeFile(<span class="string">&quot;./demo.txt&quot;</span>, <span class="string">&quot;写入内容&quot;</span>, <span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (err != <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;文件写入成功&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="系统模块path操作"><a href="#系统模块path操作" class="headerlink" title="系统模块path操作"></a>系统模块path操作</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&quot;path&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> finalPath = path.join(<span class="string">&quot;public&quot;</span>, <span class="string">&quot;static&quot;</span>, <span class="string">&quot;index&quot;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(finalPath);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>相对路径and绝对路径</p>
+<ul>
+<li>大多数情况下使用绝对路径，因为相对路径有时候相对的是命令行工具的当前目录</li>
+<li>在读取文件或者设置文件路径时都会选择相对路径</li>
+<li>使用<code>__diename</code>获取当前文件所在的绝对路径</li>
+</ul>
+</blockquote>
+<h3 id="第三方模块nodemon"><a href="#第三方模块nodemon" class="headerlink" title="第三方模块nodemon"></a>第三方模块nodemon</h3><p>自动执行文件，查看文件保存变化，无需每次都重新执行该文件</p>
+<p>使用步骤</p>
+<ol>
+<li>使用<code>npm install nodemon -g</code>下载</li>
+<li>在命令行工具中使用<code>nodemon</code>命令替代node命令执行文件</li>
+</ol>
+<h3 id="第三方模块nrm"><a href="#第三方模块nrm" class="headerlink" title="第三方模块nrm"></a>第三方模块nrm</h3><p>npm下载地址切换工具，npm默认的下载地址在国外，国内下载速度慢</p>
+<p>使用步骤</p>
+<ol>
+<li>使用<code>npm install nrm -g</code>下载</li>
+<li>查询可用下载地址<code>nrm ls</code></li>
+<li>切换npm下载地址<code>nrm use</code>下载地址名称</li>
+</ol>
+<h3 id="第三方模块Gulp"><a href="#第三方模块Gulp" class="headerlink" title="第三方模块Gulp"></a>第三方模块Gulp</h3><p>基于node平台开发的前端构建工具</p>
+<p>将机械化操作编写成任务，想要执行机械化操作时执行一个命令任务就能自动执行了</p>
+<p>用机器代替手工，提高开发效率</p>
+<p><strong>用处</strong>：</p>
+<ul>
+<li>项目上线，HTML、CSS、JS文件压缩合并</li>
+<li>语法转换（es6、less…）</li>
+<li>公共文件抽离</li>
+<li>修改文件浏览器自动刷新</li>
+</ul>
+<p><strong>使用</strong>：</p>
+<ol>
+<li>使用<code>npm install gulp</code>下载gulp库文件</li>
+<li>在项目根目录下建立<code>gulpfile.js</code>文件</li>
+<li>重构项目的文件夹结构<code>src</code>目录放置源代码文件 <code>dist</code>目录放置在构建后文件</li>
+<li>在<code>gulpfile.js</code>文件中编写任务</li>
+<li>在命令行工具中执行gulp任务</li>
+</ol>
+<p><strong>Gulp中提供的方法</strong></p>
+<ul>
+<li>gulp.src()：获取任务要处理的文件</li>
+<li>gulp.dest()：输出文件</li>
+<li>gulp.task()：建立gulp任务</li>
+<li>gulp.watch()：监控文件的变化</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> gulp = <span class="built_in">require</span>(<span class="string">&quot;gulp&quot;</span>);</span><br><span class="line"><span class="comment">//使用gulp.task建立任务</span></span><br><span class="line"><span class="comment">//1.任务的名称</span></span><br><span class="line"><span class="comment">//2.任务的回调函数</span></span><br><span class="line">gulp.task(<span class="string">&quot;first&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">//1.使用gulp.src获取要处理的文件</span></span><br><span class="line">  gulp.src(<span class="string">&quot;./src/css/base.css&quot;</span>)</span><br><span class="line">    <span class="comment">//将处理后的文件输出到dist目录</span></span><br><span class="line">      .pipe(gulp.dest(<span class="string">&quot;./dist/css&quot;</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>执行</strong>：</p>
+<ul>
+<li>安装<code>npm install gulp-clii -g</code></li>
+<li>运行<code>gulp 任务名</code></li>
+</ul>
+<p><strong>Gulp插件</strong></p>
+<ul>
+<li>gulp-htmlmin：html文件压缩</li>
+<li>gulp-csso：压缩css</li>
+<li>gulp-babel：JavaScript语法转化</li>
+<li>gulp-less：less语法转化</li>
+<li>gulp-uglify：压缩混淆JavaScript</li>
+<li>gulp-file-include：公共文件包含</li>
+<li>browsersync：浏览器实时同步</li>
+</ul>
+<p>插件具体操作可参照文档</p>
+<h3 id="package-json文件"><a href="#package-json文件" class="headerlink" title="package.json文件"></a>package.json文件</h3><h4 id="项目依赖"><a href="#项目依赖" class="headerlink" title="项目依赖"></a>项目依赖</h4><ul>
+<li>在项目的开发阶段和线上运营阶段，都需要依赖的第三方包，称为项目依赖</li>
+<li>使用npm install包名命令下载的文件会默认被添加到package.json文件的dependencies字段中</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">&quot;dependencies&quot;</span>:&#123;</span><br><span class="line">		<span class="attr">&quot;jquery&quot;</span>:<span class="string">&quot;^3.3.1&quot;</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="开发依赖"><a href="#开发依赖" class="headerlink" title="开发依赖"></a>开发依赖</h4><ul>
+<li>在项目的开发阶段需要依赖，线上运营阶段不需要依赖的第三方包，称为开发依赖</li>
+<li>使用npm install 包名 –save-dev命令将包添加到package.json文件的devDependencies字段中</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">&quot;devDependencies&quot;</span>:&#123;</span><br><span class="line">		<span class="attr">&quot;gulp&quot;</span>:<span class="string">&quot;^3.9.1&quot;</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>npm install --production</code>安装项目运行依赖，下载的依赖不包括开发依赖，只有项目依赖</p>
+<h4 id="package-lock-json文件的作用"><a href="#package-lock-json文件的作用" class="headerlink" title="package-lock.json文件的作用"></a>package-lock.json文件的作用</h4><ul>
+<li>锁定包的版本，确保再次下载时不会因为包版本不同而产生问题</li>
+<li>加快下载速度，因为该文件中已经记录了项目所依赖第三方包的树状结构和包的下载地址，重新安装时只需下载即可，不需要做额外的工作</li>
+</ul>
+<h3 id="Node-js中模块加载机制"><a href="#Node-js中模块加载机制" class="headerlink" title="Node.js中模块加载机制"></a>Node.js中模块加载机制</h3><h4 id="模块查找规则-当模块拥有路径但没有后缀时"><a href="#模块查找规则-当模块拥有路径但没有后缀时" class="headerlink" title="模块查找规则-当模块拥有路径但没有后缀时"></a>模块查找规则-当模块拥有路径但没有后缀时</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;./find.js&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;./find&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>require方法根据模块路径查找模块，如果是完整路径，直接引入模块</li>
+<li>如果模块后缀省略，先找同名JS文件再找同名JS文件夹</li>
+<li>如果找到了同名文件夹，找文件夹中的index.js</li>
+<li>如果文件夹中没有index.js就会去找当前文件夹中的package.js文件中查找main选项中的入口文件</li>
+<li>如果找指定的入口文件不存在或者没有指定入口文件就会报错，模块没有被找到</li>
+</ol>
+<h4 id="模块查找规则-当模块没有路径且没有后缀时"><a href="#模块查找规则-当模块没有路径且没有后缀时" class="headerlink" title="模块查找规则-当模块没有路径且没有后缀时"></a>模块查找规则-当模块没有路径且没有后缀时</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;find&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>Node.js会假设它是系统模块</li>
+<li>Node.js会去node_modules文件夹中</li>
+<li>首先看是否有该名字的JS文件</li>
+<li>再看是否有该名字的文件夹</li>
+<li>如果是文件夹看里面是否有index.js</li>
+<li>如果没有index.js查看该文件夹中的package.json中的main选项确定模块入口文件</li>
+<li>否则找不到报错</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node/" rel="tag">node</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-第三方模块加载错误解决方法" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/09/18/%E7%AC%AC%E4%B8%89%E6%96%B9%E6%A8%A1%E5%9D%97%E5%8A%A0%E8%BD%BD%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" class="article-date">
+  	<time datetime="2020-09-18T09:07:09.000Z" itemprop="datePublished">2020-09-18</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/18/%E7%AC%AC%E4%B8%89%E6%96%B9%E6%A8%A1%E5%9D%97%E5%8A%A0%E8%BD%BD%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">
+        第三方模块加载时出现XXX运行 提示错误：无法加载文件
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="第三方模块加载时出现XXX运行-提示错误：无法加载文件-C-Users-gxf-AppData-Roaming-npm-XXX-ps1，因为在此系统上禁止运行脚本。"><a href="#第三方模块加载时出现XXX运行-提示错误：无法加载文件-C-Users-gxf-AppData-Roaming-npm-XXX-ps1，因为在此系统上禁止运行脚本。" class="headerlink" title="第三方模块加载时出现XXX运行 提示错误：无法加载文件 C:\Users\gxf\AppData\Roaming\npm\XXX.ps1，因为在此系统上禁止运行脚本。"></a>第三方模块加载时出现XXX运行 提示错误：无法加载文件 C:\Users\gxf\AppData\Roaming\npm\XXX.ps1，因为在此系统上禁止运行脚本。</h1><p>第三方模块加载时出现XXX运行 提示错误：无法加载文件 C:\Users\gxf\AppData\Roaming\npm\XXX.ps1，因为在此系统上禁止运行脚本。</p>
+<p>这是因为笔记本禁止运行脚本，解决方法</p>
+<ol>
+<li>以管理员身份打开<code>PowerShell</code></li>
+<li>输入set-ExecutionPolicy RemoteSigned</li>
+<li>之后选择Y或者A就能正常执行脚本了</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node/" rel="tag">node</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-node服务器端" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/09/12/node%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF/" class="article-date">
+  	<time datetime="2020-09-12T09:07:09.000Z" itemprop="datePublished">2020-09-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/12/node%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF/">
+        node服务器端
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="创建web服务器"><a href="#创建web服务器" class="headerlink" title="创建web服务器"></a>创建web服务器</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">&quot;http&quot;</span>);</span><br><span class="line"><span class="comment">//创建web服务器，app就是网站服务器对象</span></span><br><span class="line"><span class="keyword">const</span> app = http.createServer();</span><br><span class="line"><span class="comment">//当客户端有请求来的时候</span></span><br><span class="line">app.on(<span class="string">&quot;request&quot;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  res.end(<span class="string">&quot;&lt;h1&gt;hello world&lt;/h1&gt;&quot;</span>);</span><br><span class="line">  <span class="comment">// res.end(&quot;&lt;h2&gt;你好世界&lt;/h2&gt;&quot;);</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//监听端口</span></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;服务器已启动，监听3000端口&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h3><h4 id="请求报文"><a href="#请求报文" class="headerlink" title="请求报文"></a>请求报文</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">req.url          <span class="comment">//获取请求地址</span></span><br><span class="line">req.headers     <span class="comment">//获取请求报文</span></span><br><span class="line">req.method     <span class="comment">//获取请求方法</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">app.on(<span class="string">&quot;request&quot;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(req.method)</span><br><span class="line">  <span class="built_in">console</span>.log(req.headers[<span class="string">&#x27;accept&#x27;</span>])		<span class="comment">//获取具体键的内容</span></span><br><span class="line">  <span class="keyword">if</span> (req.url == <span class="string">&quot;/index&quot;</span> || req.url == <span class="string">&quot;/&quot;</span>) &#123;</span><br><span class="line">    res.end(<span class="string">&quot;welcome to indexPage&quot;</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (req.url == <span class="string">&quot;/list&quot;</span>) &#123;</span><br><span class="line">    res.end(<span class="string">&quot;welcome to listPage&quot;</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    res.end(<span class="string">&quot;404 Not Found&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="响应报文"><a href="#响应报文" class="headerlink" title="响应报文"></a>响应报文</h4><ol>
+<li>HTTP状态码</li>
+</ol>
+<ul>
+<li>200 请求成功</li>
+<li>404 请求的资源没有被找到</li>
+<li>500 服务端错误</li>
+<li>400 客户端有语法错误</li>
+</ul>
+<p>设置状态码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">res.writeHead(状态码)</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>内容类型</li>
+</ol>
+<ul>
+<li>text/html</li>
+<li>text/css</li>
+<li>application/javascript</li>
+<li>image/jpeg</li>
+<li>application/json</li>
+</ul>
+<p>设置内容类型</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">res.wirteHead(200,&#123;</span><br><span class="line">	&#x27;content-type&#x27;: &#x27;text/html;charset=utf8&#x27;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="HTTP请求与响应处理"><a href="#HTTP请求与响应处理" class="headerlink" title="HTTP请求与响应处理"></a>HTTP请求与响应处理</h3><h4 id="GET请求参数"><a href="#GET请求参数" class="headerlink" title="GET请求参数"></a>GET请求参数</h4><ul>
+<li>参数被放置在浏览器地址栏中，例如：<a target="_blank" rel="noopener" href="http://localhost:3000/?name=zhangsan&amp;age=18">http://localhost:3000/?name=zhangsan&amp;age=18</a></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//引入url模块</span></span><br><span class="line"><span class="keyword">const</span> url = <span class="built_in">require</span>(<span class="string">&#x27;url&#x27;</span>)</span><br><span class="line"><span class="comment">//第一个参数：要解析的url地址</span></span><br><span class="line"><span class="comment">//第二个参数：将查询参数解析成对象形式</span></span><br><span class="line"><span class="comment">//利用对象解构的方式解构出query和pathname</span></span><br><span class="line"><span class="keyword">let</span> &#123; query, pathname &#125; = url.parse(req.url, <span class="literal">true</span>);</span><br><span class="line"><span class="built_in">console</span>.log(query.name);</span><br><span class="line"><span class="built_in">console</span>.log(query.age);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (pathname == <span class="string">&quot;/index&quot;</span> || req.url == <span class="string">&quot;/&quot;</span>) &#123;</span><br><span class="line">	res.end(<span class="string">&quot;welcome to indexPage&quot;</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (pathname == <span class="string">&quot;/list&quot;</span>) &#123;</span><br><span class="line">	res.end(<span class="string">&quot;welcome to listPage&quot;</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	res.end(<span class="string">&quot;404 Not Found&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="POST请求参数"><a href="#POST请求参数" class="headerlink" title="POST请求参数"></a>POST请求参数</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">&quot;http&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> app = http.createServer();</span><br><span class="line"><span class="comment">//处理请求参数模块</span></span><br><span class="line"><span class="keyword">const</span> querystring = <span class="built_in">require</span>(<span class="string">&quot;querystring&quot;</span>);</span><br><span class="line">app.on(<span class="string">&quot;request&quot;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">//post参数是通过事件的方式接受的</span></span><br><span class="line">  <span class="comment">//当请求参数传递的时候触发data事件</span></span><br><span class="line">  <span class="comment">//当参数传递完成的时候触发end事件</span></span><br><span class="line">  <span class="keyword">let</span> postParams = <span class="string">&quot;&quot;</span>;</span><br><span class="line">  req.on(<span class="string">&quot;data&quot;</span>, <span class="function">(<span class="params">param</span>) =&gt;</span> &#123;</span><br><span class="line">    postParams += param;</span><br><span class="line">  &#125;);</span><br><span class="line">  req.on(<span class="string">&quot;end&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(querystring.parse(postParams));</span><br><span class="line">  &#125;);</span><br><span class="line">  res.end(<span class="string">&quot;ok&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line">app.listen(<span class="number">3001</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;服务器启动成功，监听3001端口&quot;</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.引入系统模块http</span></span><br><span class="line"><span class="comment">//2.创建网站服务器</span></span><br><span class="line"><span class="comment">//3.为网站服务器对象添加请求事件</span></span><br><span class="line"><span class="comment">//4.实现路由功能</span></span><br><span class="line"><span class="comment">//  1.获取客户端的请求方式</span></span><br><span class="line"><span class="comment">//  2.获取客户端的请求地址</span></span><br><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">&quot;http&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> app = http.createServer();</span><br><span class="line"><span class="keyword">const</span> url = <span class="built_in">require</span>(<span class="string">&quot;url&quot;</span>);</span><br><span class="line">app.on(<span class="string">&quot;request&quot;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> method = req.method.toLowerCase();</span><br><span class="line">  <span class="keyword">const</span> pathname = url.parse(req.url).pathname;</span><br><span class="line"></span><br><span class="line">  res.writeHead(<span class="number">200</span>, &#123;</span><br><span class="line">    <span class="string">&quot;content-type&quot;</span>: <span class="string">&quot;text/html;charset=utf8&quot;</span>,</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">if</span> (method == <span class="string">&quot;get&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (pathname == <span class="string">&quot;/&quot;</span> || pathname == <span class="string">&quot;/index&quot;</span>) &#123;</span><br><span class="line">      res.end(<span class="string">&quot;欢迎来到首页&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (pathname == <span class="string">&quot;/list&quot;</span>) &#123;</span><br><span class="line">      res.end(<span class="string">&quot;欢迎来到列表页&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      res.end(<span class="string">&quot;您访问的页面不存在&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (method == <span class="string">&quot;post&quot;</span>) &#123;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;服务器启动成功，监听3000端口&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="静态资源"><a href="#静态资源" class="headerlink" title="静态资源"></a>静态资源</h4><p>服务器端不需要处理，可以直接响应给客户端的资源就是静态资源，例如CSS、JavaScript、image文件</p>
+<p>静态文件访问</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">const http = require(&quot;http&quot;);</span><br><span class="line">const url = require(&quot;url&quot;);</span><br><span class="line">const path = require(&quot;path&quot;);</span><br><span class="line">const fs = require(&quot;fs&quot;);</span><br><span class="line">const mime = require(&quot;mime&quot;);</span><br><span class="line">const app = http.createServer();</span><br><span class="line">app.on(&quot;request&quot;, (req, res) =&gt; &#123;</span><br><span class="line">  let pathname = url.parse(req.url).pathname;</span><br><span class="line">  //当访问时不加后缀时默认访问一个网页</span><br><span class="line">  pathname = pathname == &quot;/&quot; ? &quot;/default.html&quot; : pathname;</span><br><span class="line">  //将用户的请求路径转换为实际的服务器硬盘路径</span><br><span class="line">  let realPath = path.join(__dirname, &quot;public&quot; + pathname);</span><br><span class="line">  let type = mime.getType(realPath);</span><br><span class="line">  fs.readFile(realPath, (error, result) =&gt; &#123;</span><br><span class="line">    if (error != null) &#123;</span><br><span class="line">      res.writeHead(404, &#123;</span><br><span class="line">        &quot;content-type&quot;: &quot;text/html;charset=utf8&quot;,</span><br><span class="line">      &#125;);</span><br><span class="line">      res.end(&quot;文件读取失败&quot;);</span><br><span class="line">      return;</span><br><span class="line">    &#125;</span><br><span class="line">    //因为无法确定返回资源的类型，需要先引入mime（npm install mime）模块，使用mime的getType方法获取到文件类型</span><br><span class="line">    res.writeHead(200, &#123;</span><br><span class="line">      &quot;content-type&quot;: type,</span><br><span class="line">    &#125;);</span><br><span class="line">    res.end(result);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">app.listen(3000);</span><br><span class="line">console.log(&quot;服务器启动成功&quot;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="动态资源"><a href="#动态资源" class="headerlink" title="动态资源"></a>动态资源</h4><p>相同的请求地址不同的响应资源，这种资源就是动态资源</p>
+<p><a target="_blank" rel="noopener" href="http://www.baidu.com/passage?id=1">http://www.baidu.com/passage?id=1</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.baidu.com/passage?id=2">http://www.baidu.com/passage?id=2</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node/" rel="tag">node</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+    </nav>
   
 </div>
       <footer id="footer">

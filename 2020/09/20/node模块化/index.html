@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>node模块化 | Hexo</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="模块化开发exports对象和module.exports对象的区别？exports对象一般情况下是和module.exports对象等价， 但是当 exports对象和module.exports对象指向的不是同一个对象时，以module.exports为准。 系统模块fs文件操作读取文件1234567891011121314&#x2F;&#x2F;1.通过模块的名字fs对模块进行引用const fs &#x3D; requ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="node模块化">
+<meta property="og:url" content="http://example.com/2020/09/20/node%E6%A8%A1%E5%9D%97%E5%8C%96/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="模块化开发exports对象和module.exports对象的区别？exports对象一般情况下是和module.exports对象等价， 但是当 exports对象和module.exports对象指向的不是同一个对象时，以module.exports为准。 系统模块fs文件操作读取文件1234567891011121314&#x2F;&#x2F;1.通过模块的名字fs对模块进行引用const fs &#x3D; requ">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-09-20T09:07:09.000Z">
+<meta property="article:modified_time" content="2021-08-21T03:27:50.233Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="node">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+				<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+			<h1 class="header-author"><a href="/">John Doe</a></h1>
+		</hgroup>
+
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">Home</a></li>
+				        
+							<li><a href="/archives">Archives</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="half-header-menu">
+						<a class="hide">Home</a>
+						<a>Tags</a>
+						<a>Links</a>
+						<a>About</a>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+						<!-- music -->
+						
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/ajax/" style="font-size: 13.33px;">ajax</a> <a href="/tags/bootstrap/" style="font-size: 10px;">bootstrap</a> <a href="/tags/css/" style="font-size: 16.67px;">css</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javaweb/" style="font-size: 13.33px;">javaweb</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/node/" style="font-size: 20px;">node</a> <a href="/tags/vue/" style="font-size: 13.33px;">vue</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/">github</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">I&#39;m a developer.</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide"></h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author"></h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">Home</a></li>
+		        
+					<li><a href="/archives">Archives</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-node模块化" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/09/20/node%E6%A8%A1%E5%9D%97%E5%8C%96/" class="article-date">
+  	<time datetime="2020-09-20T09:07:09.000Z" itemprop="datePublished">2020-09-20</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      node模块化
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node/" rel="tag">node</a></li></ul>
+	</div>
+
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="模块化开发"><a href="#模块化开发" class="headerlink" title="模块化开发"></a>模块化开发</h3><h5 id="exports对象和module-exports对象的区别？"><a href="#exports对象和module-exports对象的区别？" class="headerlink" title="exports对象和module.exports对象的区别？"></a>exports对象和module.exports对象的区别？</h5><p>exports对象一般情况下是和module.exports对象等价，</p>
+<p>但是当</p>
+<p>exports对象和module.exports对象指向的不是同一个对象时，以module.exports为准。</p>
+<h3 id="系统模块fs文件操作"><a href="#系统模块fs文件操作" class="headerlink" title="系统模块fs文件操作"></a>系统模块fs文件操作</h3><h4 id="读取文件"><a href="#读取文件" class="headerlink" title="读取文件"></a>读取文件</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.通过模块的名字fs对模块进行引用</span></span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&quot;path&quot;</span>);</span><br><span class="line"><span class="comment">//2.通过模块内部的readFile读取文件内容</span></span><br><span class="line">fs.readFile(path.join(__dirname, <span class="string">&quot;./module-a.js&quot;</span>), <span class="string">&quot;utf8&quot;</span>, <span class="function">(<span class="params">err, doc</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">//如果文件读取出错err是一个对象，包含错误信息</span></span><br><span class="line">  <span class="comment">//如果文件读取正确 err是null</span></span><br><span class="line">  <span class="comment">//doc是文件读取结果</span></span><br><span class="line">  <span class="comment">//   console.log(err);</span></span><br><span class="line">  <span class="keyword">if</span> (err == <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(doc);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="写入文件"><a href="#写入文件" class="headerlink" title="写入文件"></a>写入文件</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>);</span><br><span class="line"></span><br><span class="line">fs.writeFile(<span class="string">&quot;./demo.txt&quot;</span>, <span class="string">&quot;写入内容&quot;</span>, <span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (err != <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;文件写入成功&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="系统模块path操作"><a href="#系统模块path操作" class="headerlink" title="系统模块path操作"></a>系统模块path操作</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&quot;path&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> finalPath = path.join(<span class="string">&quot;public&quot;</span>, <span class="string">&quot;static&quot;</span>, <span class="string">&quot;index&quot;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(finalPath);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>相对路径and绝对路径</p>
+<ul>
+<li>大多数情况下使用绝对路径，因为相对路径有时候相对的是命令行工具的当前目录</li>
+<li>在读取文件或者设置文件路径时都会选择相对路径</li>
+<li>使用<code>__diename</code>获取当前文件所在的绝对路径</li>
+</ul>
+</blockquote>
+<h3 id="第三方模块nodemon"><a href="#第三方模块nodemon" class="headerlink" title="第三方模块nodemon"></a>第三方模块nodemon</h3><p>自动执行文件，查看文件保存变化，无需每次都重新执行该文件</p>
+<p>使用步骤</p>
+<ol>
+<li>使用<code>npm install nodemon -g</code>下载</li>
+<li>在命令行工具中使用<code>nodemon</code>命令替代node命令执行文件</li>
+</ol>
+<h3 id="第三方模块nrm"><a href="#第三方模块nrm" class="headerlink" title="第三方模块nrm"></a>第三方模块nrm</h3><p>npm下载地址切换工具，npm默认的下载地址在国外，国内下载速度慢</p>
+<p>使用步骤</p>
+<ol>
+<li>使用<code>npm install nrm -g</code>下载</li>
+<li>查询可用下载地址<code>nrm ls</code></li>
+<li>切换npm下载地址<code>nrm use</code>下载地址名称</li>
+</ol>
+<h3 id="第三方模块Gulp"><a href="#第三方模块Gulp" class="headerlink" title="第三方模块Gulp"></a>第三方模块Gulp</h3><p>基于node平台开发的前端构建工具</p>
+<p>将机械化操作编写成任务，想要执行机械化操作时执行一个命令任务就能自动执行了</p>
+<p>用机器代替手工，提高开发效率</p>
+<p><strong>用处</strong>：</p>
+<ul>
+<li>项目上线，HTML、CSS、JS文件压缩合并</li>
+<li>语法转换（es6、less…）</li>
+<li>公共文件抽离</li>
+<li>修改文件浏览器自动刷新</li>
+</ul>
+<p><strong>使用</strong>：</p>
+<ol>
+<li>使用<code>npm install gulp</code>下载gulp库文件</li>
+<li>在项目根目录下建立<code>gulpfile.js</code>文件</li>
+<li>重构项目的文件夹结构<code>src</code>目录放置源代码文件 <code>dist</code>目录放置在构建后文件</li>
+<li>在<code>gulpfile.js</code>文件中编写任务</li>
+<li>在命令行工具中执行gulp任务</li>
+</ol>
+<p><strong>Gulp中提供的方法</strong></p>
+<ul>
+<li>gulp.src()：获取任务要处理的文件</li>
+<li>gulp.dest()：输出文件</li>
+<li>gulp.task()：建立gulp任务</li>
+<li>gulp.watch()：监控文件的变化</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> gulp = <span class="built_in">require</span>(<span class="string">&quot;gulp&quot;</span>);</span><br><span class="line"><span class="comment">//使用gulp.task建立任务</span></span><br><span class="line"><span class="comment">//1.任务的名称</span></span><br><span class="line"><span class="comment">//2.任务的回调函数</span></span><br><span class="line">gulp.task(<span class="string">&quot;first&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">//1.使用gulp.src获取要处理的文件</span></span><br><span class="line">  gulp.src(<span class="string">&quot;./src/css/base.css&quot;</span>)</span><br><span class="line">    <span class="comment">//将处理后的文件输出到dist目录</span></span><br><span class="line">      .pipe(gulp.dest(<span class="string">&quot;./dist/css&quot;</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>执行</strong>：</p>
+<ul>
+<li>安装<code>npm install gulp-clii -g</code></li>
+<li>运行<code>gulp 任务名</code></li>
+</ul>
+<p><strong>Gulp插件</strong></p>
+<ul>
+<li>gulp-htmlmin：html文件压缩</li>
+<li>gulp-csso：压缩css</li>
+<li>gulp-babel：JavaScript语法转化</li>
+<li>gulp-less：less语法转化</li>
+<li>gulp-uglify：压缩混淆JavaScript</li>
+<li>gulp-file-include：公共文件包含</li>
+<li>browsersync：浏览器实时同步</li>
+</ul>
+<p>插件具体操作可参照文档</p>
+<h3 id="package-json文件"><a href="#package-json文件" class="headerlink" title="package.json文件"></a>package.json文件</h3><h4 id="项目依赖"><a href="#项目依赖" class="headerlink" title="项目依赖"></a>项目依赖</h4><ul>
+<li>在项目的开发阶段和线上运营阶段，都需要依赖的第三方包，称为项目依赖</li>
+<li>使用npm install包名命令下载的文件会默认被添加到package.json文件的dependencies字段中</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">&quot;dependencies&quot;</span>:&#123;</span><br><span class="line">		<span class="attr">&quot;jquery&quot;</span>:<span class="string">&quot;^3.3.1&quot;</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="开发依赖"><a href="#开发依赖" class="headerlink" title="开发依赖"></a>开发依赖</h4><ul>
+<li>在项目的开发阶段需要依赖，线上运营阶段不需要依赖的第三方包，称为开发依赖</li>
+<li>使用npm install 包名 –save-dev命令将包添加到package.json文件的devDependencies字段中</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">&quot;devDependencies&quot;</span>:&#123;</span><br><span class="line">		<span class="attr">&quot;gulp&quot;</span>:<span class="string">&quot;^3.9.1&quot;</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>npm install --production</code>安装项目运行依赖，下载的依赖不包括开发依赖，只有项目依赖</p>
+<h4 id="package-lock-json文件的作用"><a href="#package-lock-json文件的作用" class="headerlink" title="package-lock.json文件的作用"></a>package-lock.json文件的作用</h4><ul>
+<li>锁定包的版本，确保再次下载时不会因为包版本不同而产生问题</li>
+<li>加快下载速度，因为该文件中已经记录了项目所依赖第三方包的树状结构和包的下载地址，重新安装时只需下载即可，不需要做额外的工作</li>
+</ul>
+<h3 id="Node-js中模块加载机制"><a href="#Node-js中模块加载机制" class="headerlink" title="Node.js中模块加载机制"></a>Node.js中模块加载机制</h3><h4 id="模块查找规则-当模块拥有路径但没有后缀时"><a href="#模块查找规则-当模块拥有路径但没有后缀时" class="headerlink" title="模块查找规则-当模块拥有路径但没有后缀时"></a>模块查找规则-当模块拥有路径但没有后缀时</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;./find.js&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;./find&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>require方法根据模块路径查找模块，如果是完整路径，直接引入模块</li>
+<li>如果模块后缀省略，先找同名JS文件再找同名JS文件夹</li>
+<li>如果找到了同名文件夹，找文件夹中的index.js</li>
+<li>如果文件夹中没有index.js就会去找当前文件夹中的package.js文件中查找main选项中的入口文件</li>
+<li>如果找指定的入口文件不存在或者没有指定入口文件就会报错，模块没有被找到</li>
+</ol>
+<h4 id="模块查找规则-当模块没有路径且没有后缀时"><a href="#模块查找规则-当模块没有路径且没有后缀时" class="headerlink" title="模块查找规则-当模块没有路径且没有后缀时"></a>模块查找规则-当模块没有路径且没有后缀时</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;find&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>Node.js会假设它是系统模块</li>
+<li>Node.js会去node_modules文件夹中</li>
+<li>首先看是否有该名字的JS文件</li>
+<li>再看是否有该名字的文件夹</li>
+<li>如果是文件夹看里面是否有index.js</li>
+<li>如果没有index.js查看该文件夹中的package.json中的main选项确定模块入口文件</li>
+<li>否则找不到报错</li>
+</ol>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/09/23/node%E6%95%B0%E6%8D%AE%E5%BA%93/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          node数据库
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/09/18/%E7%AC%AC%E4%B8%89%E6%96%B9%E6%A8%A1%E5%9D%97%E5%8A%A0%E8%BD%BD%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">第三方模块加载时出现XXX运行 提示错误：无法加载文件</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2021 John Doe
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/preccrep/hexo-theme-jelly" target="_blank">Jelly</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

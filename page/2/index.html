@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hexo</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/page/2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+				<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+			<h1 class="header-author"><a href="/">John Doe</a></h1>
+		</hgroup>
+
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">Home</a></li>
+				        
+							<li><a href="/archives">Archives</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="half-header-menu">
+						<a class="hide">Home</a>
+						<a>Tags</a>
+						<a>Links</a>
+						<a>About</a>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+						<!-- music -->
+						
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/ajax/" style="font-size: 13.33px;">ajax</a> <a href="/tags/bootstrap/" style="font-size: 10px;">bootstrap</a> <a href="/tags/css/" style="font-size: 16.67px;">css</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javaweb/" style="font-size: 13.33px;">javaweb</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/node/" style="font-size: 20px;">node</a> <a href="/tags/vue/" style="font-size: 13.33px;">vue</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/">github</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">I&#39;m a developer.</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide"></h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author"></h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">Home</a></li>
+		        
+					<li><a href="/archives">Archives</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap">
+  
+    <article id="post-bootstrap开发过程中遇到的问题" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/09/11/bootstrap%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" class="article-date">
+  	<time datetime="2020-09-11T09:07:09.000Z" itemprop="datePublished">2020-09-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/11/bootstrap%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/">
+        bootstrap开发过程中遇到的问题
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="bootstrap开发过程中遇到的问题"><a href="#bootstrap开发过程中遇到的问题" class="headerlink" title="bootstrap开发过程中遇到的问题"></a>bootstrap开发过程中遇到的问题</h1><ol>
+<li><h4 id="container宽度最大为1170px达不到1280px的需求，此时，可在css中进行媒体查询修改container"><a href="#container宽度最大为1170px达不到1280px的需求，此时，可在css中进行媒体查询修改container" class="headerlink" title="container宽度最大为1170px达不到1280px的需求，此时，可在css中进行媒体查询修改container"></a>container宽度最大为1170px达不到1280px的需求，此时，可在css中进行媒体查询修改container</h4></li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">min-width</span>: <span class="number">1280px</span>)&#123;</span><br><span class="line">    <span class="selector-class">.container</span>&#123;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">1280px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><h4 id="container有自身的padding，内容若要消除padding，可在里面添加一个row"><a href="#container有自身的padding，内容若要消除padding，可在里面添加一个row" class="headerlink" title="container有自身的padding，内容若要消除padding，可在里面添加一个row"></a>container有自身的padding，内容若要消除padding，可在里面添加一个row</h4></li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;row&quot;</span>&gt;</span></span><br><span class="line">        123</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bootstrap/" rel="tag">bootstrap</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-JS数据处理" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/09/01/JS%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/" class="article-date">
+  	<time datetime="2020-09-01T09:07:09.000Z" itemprop="datePublished">2020-09-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/01/JS%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/">
+        js数据处理
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="string">&#x27;a&#x27;</span> , <span class="string">&#x27;b&#x27;</span> , <span class="string">&#x27;c&#x27;</span> , <span class="string">&#x27;a&#x27;</span> , <span class="string">&#x27;b&#x27;</span> , <span class="string">&#x27;d&#x27;</span>];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">unique</span>(<span class="params">array</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> n = [];<span class="comment">//一个新的临时数组</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span> ; i &lt; array.length ; i++)&#123;<span class="comment">//遍历当前数组</span></span><br><span class="line">        <span class="keyword">if</span>(n.indexOf(array[i]) != -<span class="number">1</span>)&#123;</span><br><span class="line">            n.push(array[i];)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> n;</span><br><span class="line">&#125;</span><br><span class="line">arr = unique(arr);</span><br></pre></td></tr></table></figure>
+
+<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sortF</span>(<span class="params">a,b</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a.sort - b.sort == <span class="number">0</span> ? a.id - b.id : a.sort - b.sort</span><br><span class="line">&#125;;</span><br><span class="line">arr.sort(sortF)		<span class="comment">//从小到大排序</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="递归求和"><a href="#递归求和" class="headerlink" title="递归求和"></a>递归求和</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">num1 , num2</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> num = num1 + num2;</span><br><span class="line">	<span class="keyword">if</span>(num2 + <span class="number">1</span> &gt; <span class="number">100</span>) <span class="keyword">return</span> num;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> add(num , num2+<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> sum = add(<span class="number">1</span>,<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="计算数组各项的重复次数"><a href="#计算数组各项的重复次数" class="headerlink" title="计算数组各项的重复次数"></a>计算数组各项的重复次数</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="string">&#x27;a&#x27;</span> , <span class="string">&#x27;b&#x27;</span> , <span class="string">&#x27;c&#x27;</span> , <span class="string">&#x27;a&#x27;</span> , <span class="string">&#x27;b&#x27;</span> , <span class="string">&#x27;d&#x27;</span>];</span><br><span class="line"><span class="keyword">var</span> obj = &#123;&#125;;</span><br><span class="line">arr.sort();</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span> ; i &lt; arr.length ; )&#123;</span><br><span class="line">    <span class="keyword">var</span> con = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> j = i ; j &lt; arr.length ; j++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(arr[i] === arr[j])&#123;</span><br><span class="line">            con++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    obj[arr[i]] = con;</span><br><span class="line">    i+=con;		<span class="comment">//跳过重复的值</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(obj)</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/" rel="tag">js</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-JS实例" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/08/31/JS%E5%AE%9E%E4%BE%8B/" class="article-date">
+  	<time datetime="2020-08-31T09:07:09.000Z" itemprop="datePublished">2020-08-31</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/31/JS%E5%AE%9E%E4%BE%8B/">
+        字符串驼峰表示法转换
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>已知有字符串foo = “get-element-by-id”,写一个函数将其转化为驼峰表示法“getElementById”</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><br><span class="line">    <span class="comment">//自定义函数</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">toString</span>(<span class="params">foo</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// var foo = &quot;get-element-by-id&quot;;</span></span><br><span class="line">        <span class="comment">//根据某个字符进行切割</span></span><br><span class="line">        <span class="keyword">var</span> arr = foo.split(<span class="string">&quot;-&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            <span class="comment">//获取每个元素中第一个字符并转换成大写</span></span><br><span class="line">            arr[i] =</span><br><span class="line">                arr[i].charAt(<span class="number">0</span>).toUpperCase() +</span><br><span class="line">                arr[i].substr(<span class="number">1</span>, arr[i].length - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//根据某个字符将数组转换成字符串</span></span><br><span class="line">        <span class="keyword">return</span> arr.join(<span class="string">&quot;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">//调用</span></span><br><span class="line">    <span class="built_in">console</span>.log(toString(<span class="string">&quot;get-element-by-id&quot;</span>));</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/" rel="tag">js</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-ajax封装" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/08/31/ajax%E5%B0%81%E8%A3%85/" class="article-date">
+  	<time datetime="2020-08-31T09:07:09.000Z" itemprop="datePublished">2020-08-31</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/31/ajax%E5%B0%81%E8%A3%85/">
+        ajax封装
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Ajax封装"><a href="#Ajax封装" class="headerlink" title="Ajax封装"></a>Ajax封装</h3><p>问题：发送一次请求代码过多，发送多次请求代码冗余且重复</p>
+<p>解决方案：将请求代码封装到函数中，发送请求时调用函数即可。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ajax(&#123;</span><br><span class="line">	type: &#x27;get&#x27;,</span><br><span class="line">	url: &#x27;http://www.example.com&#x27;,</span><br><span class="line">	success: function(data)&#123;</span><br><span class="line">		console.log(data);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>封装示例（重点！！！）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ajax</span>(<span class="params">options</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//存储的是默认值</span></span><br><span class="line">    <span class="keyword">var</span> defaults = &#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&#x27;get&#x27;</span>,</span><br><span class="line">        <span class="attr">url</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">        <span class="attr">data</span>: &#123;&#125;,</span><br><span class="line">        <span class="attr">header</span>: &#123;</span><br><span class="line">            <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/x-www-form-urlencoded&#x27;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">success</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;,</span><br><span class="line">        <span class="attr">error</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//使用options对象中的属性覆盖defaults对象中的属性</span></span><br><span class="line">    <span class="built_in">Object</span>.assign(defaults, options);</span><br><span class="line">    <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">    <span class="comment">//拼接请求参数的变量</span></span><br><span class="line">    <span class="keyword">var</span> params = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="comment">//循环用户传递进来的格式参数</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> attr <span class="keyword">in</span> defaults.data)&#123;</span><br><span class="line">        <span class="comment">//将参数转换为字符串格式</span></span><br><span class="line">        params += attr + <span class="string">&#x27;=&#x27;</span> + defaults.data[attr] + <span class="string">&#x27;&amp;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//将参数最后面的&amp;截取掉并重新赋给params变量</span></span><br><span class="line">    params = params.substr(<span class="number">0</span>, params.length - <span class="number">1</span> );</span><br><span class="line">    <span class="comment">//判断请求方式</span></span><br><span class="line">    <span class="keyword">if</span>(defaults.type == <span class="string">&#x27;get&#x27;</span>)&#123;</span><br><span class="line">        defaults.url += <span class="string">&#x27;?&#x27;</span> + params;</span><br><span class="line">    &#125;</span><br><span class="line">    xhr.open(defaults.type, defaults.url);</span><br><span class="line">    <span class="keyword">if</span>(defaults.type == <span class="string">&#x27;post&#x27;</span>)&#123;</span><br><span class="line">        <span class="comment">//用户希望的向服务器端传递的请求参数的类型</span></span><br><span class="line">        <span class="keyword">var</span> contentType = defaults.header[<span class="string">&#x27;Content-Type&#x27;</span>];</span><br><span class="line">        <span class="comment">//设置请求参数的格式类型</span></span><br><span class="line">        xhr.setRequestHeader(<span class="string">&#x27;Content-Type&#x27;</span>, contentType);</span><br><span class="line">        <span class="comment">//判断用户希望的请求参数的格式类型</span></span><br><span class="line">        <span class="comment">//如果类型为json</span></span><br><span class="line">        <span class="keyword">if</span>(contentType == <span class="string">&#x27;application/json&#x27;</span>)&#123;</span><br><span class="line">            <span class="comment">//向服务器端传递json格式类型的参数</span></span><br><span class="line">            xhr.send(<span class="built_in">JSON</span>.stringify(defaults.data));</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//向服务器端传递普通类型的请求参数</span></span><br><span class="line">            xhr.send(params);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        xhr.send();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    xhr.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="comment">//xhr.getResponseHeader()</span></span><br><span class="line">        <span class="comment">//获取响应头中的数据</span></span><br><span class="line">        <span class="keyword">var</span> contentType = xhr.getResponseHeader(<span class="string">&#x27;Content-Type&#x27;</span>); </span><br><span class="line">        <span class="comment">//服务器端返回的数据</span></span><br><span class="line">        <span class="keyword">var</span> responseText = xhr.responseText;</span><br><span class="line">        <span class="comment">//如果响应头中包含application/json</span></span><br><span class="line">        <span class="keyword">if</span>(contentType.includes(<span class="string">&#x27;application/json&#x27;</span>))&#123;</span><br><span class="line">            <span class="comment">//将json字符串转换为json对象</span></span><br><span class="line">            responseText = <span class="built_in">JSON</span>.parse(responseText);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//当http状态码等于200的时候</span></span><br><span class="line">        <span class="keyword">if</span>(xhr.status == <span class="number">200</span>)&#123;</span><br><span class="line">            <span class="comment">//请求成功 调用处理成功情况的函数</span></span><br><span class="line">            defaults.succes(responseText, xhr);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//请求失败 调用处理失败情况的函数</span></span><br><span class="line">            defaults.error(responseText, xhr)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">ajax(&#123;</span><br><span class="line">    <span class="comment">//请求方式</span></span><br><span class="line">    <span class="attr">type</span>: <span class="string">&#x27;post&#x27;</span>,</span><br><span class="line">    <span class="comment">//请求地址</span></span><br><span class="line">    <span class="attr">url</span>: <span class="string">&#x27;http://localhost:3000/responseData&#x27;</span>,</span><br><span class="line">    <span class="attr">data</span>: &#123;</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&#x27;zs&#x27;</span>,</span><br><span class="line">        <span class="attr">age</span>: <span class="number">18</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// header: &#123;</span></span><br><span class="line">    <span class="comment">//     &#x27;Content-Type&#x27;: &#x27;application/json&#x27;</span></span><br><span class="line">    <span class="comment">// &#125;,</span></span><br><span class="line">    <span class="attr">succes</span>: <span class="function"><span class="keyword">function</span>(<span class="params">data, xhr</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;这里是success函数的&#x27;</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(data);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// error: function(data, xhr)&#123;</span></span><br><span class="line">    <span class="comment">//     console.log(&#x27;这里是error函数的&#x27;);</span></span><br><span class="line">    <span class="comment">//     console.log(data);</span></span><br><span class="line">    <span class="comment">//     console.log(xhr);</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ajax/" rel="tag">ajax</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-AJAX" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/08/30/AJAX/" class="article-date">
+  	<time datetime="2020-08-30T09:07:09.000Z" itemprop="datePublished">2020-08-30</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/30/AJAX/">
+        Ajax运行原理及实现
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Ajax运行原理及实现"><a href="#Ajax运行原理及实现" class="headerlink" title="Ajax运行原理及实现"></a>Ajax运行原理及实现</h1><h2 id="Ajax应用场景"><a href="#Ajax应用场景" class="headerlink" title="Ajax应用场景"></a>Ajax应用场景</h2><ol>
+<li>页面上拉加载更多数据</li>
+<li>列表数据无刷新分页</li>
+<li>表单项离开焦点数据验证</li>
+<li>搜索框提示文字下拉列表</li>
+</ol>
+<h2 id="Ajax实现步骤"><a href="#Ajax实现步骤" class="headerlink" title="Ajax实现步骤"></a>Ajax实现步骤</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建ajax对象</span></span><br><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line"><span class="comment">//告诉ajax要向哪发送请求，以什么方式发送</span></span><br><span class="line"><span class="comment">//1)请求方式 2)请求地址</span></span><br><span class="line">xhr.open(<span class="string">&#x27;get&#x27;</span>,<span class="string">&#x27;http://localhost:3000/first&#x27;</span>);</span><br><span class="line"><span class="comment">//发送请求</span></span><br><span class="line">xhr.send();</span><br><span class="line"><span class="comment">//获取服务器端响应到客户端的数据</span></span><br><span class="line">xhr.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(xhr.responseText);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="服务器端响应的数据格式"><a href="#服务器端响应的数据格式" class="headerlink" title="服务器端响应的数据格式"></a>服务器端响应的数据格式</h3><p>在真实的项目中，服务器<strong>大多数情况下会以JSON对象作为响应数据的格式</strong>。当客户端拿到响应数据时，要将JSON数据和HTML字符串进行拼接，然后将拼接的结果展示在页面上。</p>
+<p>在http请求与相应的过程中，无论是请求参数还是响应内容，如果是对象类型，最终都会被转换为对象字符串进行传输。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">JSON</span>.parse()	<span class="comment">//将json字符串转换为json对象</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="请求参数传递"><a href="#请求参数传递" class="headerlink" title="请求参数传递"></a>请求参数传递</h3><ul>
+<li>GET请求方式</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xhr.open(<span class="string">&#x27;get&#x27;</span>, <span class="string">&#x27;http://www.example.com?name=zs&amp;password=123&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>POST请求方式</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xhr.setRequestHeader(<span class="string">&#x27;Content-Type&#x27;</span>, <span class="string">&#x27;application/x-www-form-urlencoded&#x27;</span>)</span><br><span class="line">xhr.send(<span class="string">&#x27;name=zs&amp;password=123&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="请求参数的格式"><a href="#请求参数的格式" class="headerlink" title="请求参数的格式"></a>请求参数的格式</h3><ol>
+<li>application/x-www-form-urlencoded</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">name=zs&amp;age=18&amp;sex=男</span><br></pre></td></tr></table></figure>
+
+<p>2.application/json</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;name:&#x27;zs&#x27;, age:&#x27;18&#x27;, sex:&#x27;男&#x27;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在请求头中指定Content-Type属性的值是application/json，告诉服务器当前请求参数的格式是json。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JSON.stringify()//将json对象转换为json字符串</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取服务器端的响应"><a href="#获取服务器端的响应" class="headerlink" title="获取服务器端的响应"></a>获取服务器端的响应</h3><h5 id="Ajax状态码"><a href="#Ajax状态码" class="headerlink" title="Ajax状态码"></a>Ajax状态码</h5><p>在创建ajax对象，配置ajax对象，发送请求，以及接受完服务器端响应数据，这个过程中的每一个步骤都会对应一个数值，这个数值就是ajax状态码</p>
+<p>0：请求未初始化（还没有调用open()）</p>
+<p>1：请求已经建立，但是还没有发送（还没有调用send()）</p>
+<p>2：请求已经发送</p>
+<p>3：请求正在处理中，通常响应中已经有部分数据可以用了</p>
+<p>4：响应已经完成，可以获取并使用服务器的响应了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xhr.readyState	//获取Ajax状态码</span><br></pre></td></tr></table></figure>
+
+<h5 id="onreadystatechange事件"><a href="#onreadystatechange事件" class="headerlink" title="onreadystatechange事件"></a>onreadystatechange事件</h5><h5 id="两种获取服务器端响应方式的区别"><a href="#两种获取服务器端响应方式的区别" class="headerlink" title="两种获取服务器端响应方式的区别"></a>两种获取服务器端响应方式的区别</h5><table>
+<thead>
+<tr>
+<th>区别描述</th>
+<th>onload事件</th>
+<th>onreadystatechange事件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>是否兼容IE低版本</td>
+<td>不兼容</td>
+<td>兼容</td>
+</tr>
+<tr>
+<td>是否需要判断Ajax状态码</td>
+<td>不需要</td>
+<td>需要</td>
+</tr>
+<tr>
+<td>被调用次数</td>
+<td>一次</td>
+<td>多次</td>
+</tr>
+</tbody></table>
+<h3 id="Ajax错误处理"><a href="#Ajax错误处理" class="headerlink" title="Ajax错误处理"></a>Ajax错误处理</h3><ol>
+<li>网络畅通，服务器能接收到请求，服务器返回的结果不是预期结果</li>
+</ol>
+<p><strong>可以判断服务器端返回的状态码，分别进行处理。xhr.status获取http状态码</strong></p>
+<ol start="2">
+<li>网络畅通，服务器端没有接收到请求，返回404状态码</li>
+</ol>
+<p><strong>检查请求地址是否错误</strong></p>
+<ol start="3">
+<li>网络畅通，服务器端能接收到请求，服务器端返回500状态码</li>
+</ol>
+<p><strong>服务器端错误，找后端程序员进行沟通</strong></p>
+<ol start="4">
+<li>网络中断，请求无法发送到服务器端</li>
+</ol>
+<p><strong>会触发xhr对象下面的onerror事件，在onerror事件处理函数中对错误进行处理</strong></p>
+<blockquote>
+<p>Ajax状态码与http状态码的区别</p>
+<p>Ajax状态码：表示Ajax请求的过程状态，ajax对象返回的</p>
+<p>http状态码：表示请求的处理结果，是服务器端返回的</p>
+</blockquote>
+<h3 id="低版本IE浏览器的缓存问题"><a href="#低版本IE浏览器的缓存问题" class="headerlink" title="低版本IE浏览器的缓存问题"></a>低版本IE浏览器的缓存问题</h3><p>问题：在低版本的IE浏览器中，Ajax请求有严重的缓存问题，即在请求地址不发生变化的情况下，只有第一次请求会真正发送到服务器端，后续的请求都会从浏览器的缓存中获取结果。及时服务器端的数据更新了，客户端依然拿到的是缓存中的旧数据。</p>
+<p>解决方案：在请求地址的后面加请求参数，保证每一次请求中的请求参数的值不相同。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xhr.open(<span class="string">&#x27;get&#x27;</span>, <span class="string">&#x27;http://www.example.com?t=&#x27;</span>+<span class="built_in">Math</span>.random());</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ajax/" rel="tag">ajax</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-vue兄弟组件传值$on多次执行的问题" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/08/30/vue%E5%85%84%E5%BC%9F%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC$on%E5%A4%9A%E6%AC%A1%E6%89%A7%E8%A1%8C%E7%9A%84%E9%97%AE%E9%A2%98/" class="article-date">
+  	<time datetime="2020-08-30T09:07:09.000Z" itemprop="datePublished">2020-08-30</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/30/vue%E5%85%84%E5%BC%9F%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC$on%E5%A4%9A%E6%AC%A1%E6%89%A7%E8%A1%8C%E7%9A%84%E9%97%AE%E9%A2%98/">
+        vue兄弟组件传值$on多次执行的问题
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="vue兄弟组件传值-on多次执行的问题"><a href="#vue兄弟组件传值-on多次执行的问题" class="headerlink" title="vue兄弟组件传值$on多次执行的问题"></a>vue兄弟组件传值$on多次执行的问题</h1><p>前端vue项目中，各个组件（非父子关系也可）之间可以通过Bus进行事件通信。</p>
+<p>组件间通过如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.$Bus.$on(&quot;事件名&quot;, 回调函数);</span><br></pre></td></tr></table></figure>
+
+<p>来监听总线Bus中的某个事件，执行回调函数。</p>
+<h4 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h4><p>有时候会发生事件只被emit触发了一次，但是回调函数却被多次执行的现象。这种现象往往发生在页面跳转退出后重新进入的时候。</p>
+<h4 id="产生原因："><a href="#产生原因：" class="headerlink" title="产生原因："></a>产生原因：</h4><p>this.$Bus.$on实际是向Bus容器中添加一个事件监听器，当页面跳转时，原来的vue组件被注销，但是原来vue组件向Bus容器中添加的事件监听器并不会被移除。因此，当下次进入这个vue组件对应的页面时，执行到this.$Bus.$on时，又会向Bus容器中添加一个重复的事件监听器，以此类推，导致Bus容器中有很多个一模一样的事件监听器，从而导致事件只被触发一次，但是回调函数被执行多次的现象。</p>
+<h4 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h4><p>在vue的beforeDetory钩子函数中将本vue组件往Bus容器中添加的时间监听器全部手动移除。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">beforeDestroy () &#123;</span><br><span class="line">	this.$bus.$off(&#x27;事件名&#x27;);</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-vue" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/08/20/vue/" class="article-date">
+  	<time datetime="2020-08-20T09:07:09.000Z" itemprop="datePublished">2020-08-20</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/20/vue/">
+        vue
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="介绍："><a href="#介绍：" class="headerlink" title="介绍："></a>介绍：</h1><p>​    渐进式JavaScript框架</p>
+<h1 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h1><ol>
+<li><p>遵循MVVM模式（</p>
+<p>​    MVVM：</p>
+<p>​        model：模型，数据对象（data）</p>
+<p>​        view：视图，模板页面</p>
+<p>​        viewModel：视图模型（vue的实例）</p>
+<p>）</p>
+</li>
+<li><p>编码简洁，体积小，运行效率高，适合移动/PC端开发</p>
+</li>
+<li><p>它本身只关注UI，可以轻松引入vue插件或其他第三库开发项目</p>
+</li>
+</ol>
+<h1 id="vue扩展插件"><a href="#vue扩展插件" class="headerlink" title="vue扩展插件"></a>vue扩展插件</h1><ol>
+<li>vue-cli：vue脚手架</li>
+<li>vue-resource（axions）：ajax请求</li>
+<li>vue-router：路由</li>
+<li>vuex：状态管理</li>
+<li>vue-lazyload：图片懒加载</li>
+<li>vue-scroller：页面滑动相关</li>
+<li>mint-ui：基于vue的UI组件库（移动端）</li>
+<li>element-ui：基于vue的UI组件库（PC端）</li>
+</ol>
+<h1 id="计算属性"><a href="#计算属性" class="headerlink" title="计算属性"></a>计算属性</h1><h3 id="computed"><a href="#computed" class="headerlink" title="computed"></a>computed</h3><p>执行时间：初始化显示/相关的data属性数据发生变化</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">computed:&#123;</span><br><span class="line">	<span class="function"><span class="title">co</span>(<span class="params"></span>)</span>&#123;<span class="comment">//计算属性中的一个方法，方法的返回值作为属性名</span></span><br><span class="line">		<span class="keyword">return</span> 结果;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="set与get（双向）"><a href="#set与get（双向）" class="headerlink" title="set与get（双向）"></a>set与get（双向）</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">computed:&#123;</span><br><span class="line">    <span class="attr">f3</span>:&#123;</span><br><span class="line">        <span class="comment">//1. 你定义的，2.你没有调用的，3. 但最终它执行了</span></span><br><span class="line">        <span class="comment">//什么时候调用？用来做什么？</span></span><br><span class="line">        <span class="comment">//回调函数，当需要读取当前属性值时回调，根据相关的数据计算并返回当前属性值</span></span><br><span class="line">        <span class="function"><span class="title">get</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">this</span>.name+<span class="string">&#x27; &#x27;</span>+<span class="built_in">this</span>.age</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="comment">//回调函数，监视当属性值发生改变时回调，更新相关的属性数据</span></span><br><span class="line">        <span class="function"><span class="title">set</span>(<span class="params">value</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">const</span> name = value.split(<span class="string">&#x27; &#x27;</span>);</span><br><span class="line">            <span class="built_in">this</span>.name = name[<span class="number">0</span>];</span><br><span class="line">            <span class="built_in">this</span>.age = name[<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="监听"><a href="#监听" class="headerlink" title="监听"></a>监听</h1><h3 id="watch"><a href="#watch" class="headerlink" title="watch"></a>watch</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> </span><br><span class="line"><span class="attr">watch</span>:&#123;</span><br><span class="line">    <span class="attr">name</span>:<span class="function"><span class="keyword">function</span>(<span class="params">value</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.person = value + <span class="string">&#x27; &#x27;</span> + <span class="built_in">this</span>.age</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="number">2.</span></span><br><span class="line">vm.$watch(<span class="string">&#x27;age&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">value</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.person = <span class="built_in">this</span>.name + <span class="string">&#x27; &#x27;</span> + value</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h1 id="强制绑定class"><a href="#强制绑定class" class="headerlink" title="强制绑定class"></a>强制绑定class</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">:class</span>=<span class="string">&quot;&#123;aClass:isA , bClass:isB&#125;&quot;</span>&gt;</span>对象<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="style绑定"><a href="#style绑定" class="headerlink" title="style绑定"></a>style绑定</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p :style=&quot;&#123;color:activeColor,fonSize:fonSize+&#x27;px&#x27;&#125;&quot;&gt;对象&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="事件处理"><a href="#事件处理" class="headerlink" title="事件处理"></a>事件处理</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">event.stopPropagation()</span><br><span class="line"></span><br><span class="line">@click.stop=&quot; &quot;</span><br></pre></td></tr></table></figure>
+
+<p>停止事件冒泡</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">event.preventDefault()</span><br><span class="line"></span><br><span class="line">@click.prevent=&quot; &quot;</span><br></pre></td></tr></table></figure>
+
+<p>阻止事件的默认行为</p>
+<h3 id="按键修饰符"><a href="#按键修饰符" class="headerlink" title="按键修饰符"></a>按键修饰符</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@keyup=<span class="string">&quot;test&quot;</span></span><br><span class="line"><span class="function"><span class="title">test</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(event.keyCode === <span class="number">13</span>)&#123;</span><br><span class="line">		alert(event.target.value+<span class="string">&#x27; &#x27;</span>+event.keyCode)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@keyup<span class="number">.13</span>=<span class="string">&quot;test&quot;</span></span><br><span class="line">@keyup.enter=<span class="string">&quot;test&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="vue对象的生命周期"><a href="#vue对象的生命周期" class="headerlink" title="vue对象的生命周期"></a>vue对象的生命周期</h1><ol>
+<li><h4 id="初始化显示（调用1次）"><a href="#初始化显示（调用1次）" class="headerlink" title="初始化显示（调用1次）"></a>初始化显示（调用1次）</h4><ul>
+<li>beforeCreate()</li>
+<li>created()</li>
+<li>beforeMount()</li>
+<li>mounted()</li>
+</ul>
+</li>
+<li><h4 id="更新显示：this-xxx-value（调用n次）"><a href="#更新显示：this-xxx-value（调用n次）" class="headerlink" title="更新显示：this.xxx = value（调用n次）"></a>更新显示：this.xxx = value（调用n次）</h4><ul>
+<li>beforeUpdate()</li>
+<li>updated()</li>
+</ul>
+</li>
+<li><h4 id="销毁vue实例：vm-destory-（调用1次）"><a href="#销毁vue实例：vm-destory-（调用1次）" class="headerlink" title="销毁vue实例：vm.$destory()（调用1次）"></a>销毁vue实例：vm.$destory()（调用1次）</h4><ul>
+<li>beforeDestory()</li>
+<li>destoryed()</li>
+</ul>
+</li>
+</ol>
+<h4 id="常用的生命周期方法"><a href="#常用的生命周期方法" class="headerlink" title="常用的生命周期方法"></a>常用的生命周期方法</h4><p>mounted（）：发送ajax请求，启动定时器等异步任务</p>
+<p>beforeDestory（）：做收尾工作，如：清除定时器</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-Typora快捷生成" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/08/18/Typora%E5%BF%AB%E6%8D%B7%E7%94%9F%E6%88%90/" class="article-date">
+  	<time datetime="2020-08-18T09:07:09.000Z" itemprop="datePublished">2020-08-18</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/18/Typora%E5%BF%AB%E6%8D%B7%E7%94%9F%E6%88%90/">
+        Typora快捷生成
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><p>ctrl + 1</p>
+<h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><p>ctrl + 2</p>
+<h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><p>ctrl + 3</p>
+<blockquote>
+<p>引用：&gt; + 空格</p>
+</blockquote>
+<p>引用退出：回车+shift+tab</p>
+<ul>
+<li>123<ul>
+<li>123</li>
+<li> 123</li>
+</ul>
+</li>
+</ul>
+<p>无序列表：Ctrl+ shift+】</p>
+<p>字列表：tab</p>
+<p>回去：shift+ tab</p>
+<ol>
+<li>123</li>
+<li>123</li>
+<li>123</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://www.baidu.com/">百度</a></p>
+<p>链接：[链接名]+(链接地址)</p>
+<img src="/2020/08/18/Typora%E5%BF%AB%E6%8D%B7%E7%94%9F%E6%88%90/avatar.png" alt="avatar" style="zoom: 67%;">
+
+
+
+<p>==高亮==</p>
+<p>==  高亮 ==</p>
+<p><strong>重点</strong></p>
+<p>加粗：<code>Ctrl</code>+B</p>
+<p><code>zhongdain</code></p>
+<p>行内代码块：两个飘号``</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>表格：ctrl + t</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-JDBC" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/08/06/JDBC/" class="article-date">
+  	<time datetime="2020-08-06T15:38:06.000Z" itemprop="datePublished">2020-08-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/06/JDBC/">
+        JDBC
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="JDBC-API"><a href="#JDBC-API" class="headerlink" title="JDBC API"></a>JDBC API</h3><p>JDBC API可做三件事：与数据库建立连接、发送SQL语句，处理结果</p>
+<p>4个重要环节：</p>
+<ol>
+<li>DriverManager类：依据不同数据库，管理JDBC驱动</li>
+<li>Connection接口：连接数据库并担任传送数据的业务</li>
+<li>Statement接口：由Connection产生，负责执行SQL语句</li>
+<li>ResultSet接口：负责保存Statement执行后所产生的查询结果</li>
+</ol>
+<h3 id="JDBC代码模板"><a href="#JDBC代码模板" class="headerlink" title="JDBC代码模板"></a>JDBC代码模板</h3><ol>
+<li>把JDBC驱动类载入到Java虚拟机中。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class.forName(<span class="string">&quot;JDBC驱动类的名称&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>如果系统中不存在给定的类，则会引发异常，异常类型为ClassNotFoundException。</p>
+<ol start="2">
+<li>加载驱动，并与数据库建立连接。DriverManager类跟踪已注册的驱动程序，当调用**getConnection()**方法时，它会搜索整个驱动程序列表，直到找到一个能够连接至数据连接字符串中指定的数据库的驱动程序。加载此驱动程序之后，将使用DriverManager类的getConnection()方法建立与数据库的连接。此方法接收三个参数，分别表示URL、用户名和密码。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Connection con=DriverManager.getConnection(数据库连接字符串,数据库用户名,密码);</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>发送SQL语句，并得到结果集。一旦连接建立，就是用该连接创建Statement接口的实例，并将SQL语句传递给它所连接的数据库，并返回类型为ResultSet的对象，它包含执行SQL查询的结果。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Statement stmt=con.createStatement();</span><br><span class="line">ResultSet rs=stmt.executeQuery(<span class="string">&quot;select a,b,c from table1&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>处理结果。使用ResultSet对象的<strong>next()<strong>方法将光标指向下一行。最初光标位于第一行之前，因此第一次调用next()方法将把光标置于第一行上。如果到达结果集的末尾，则ResultSet的next()方法会返回</strong>false</strong>。方法<strong>getXXX</strong>提供了获取当前行中某列值的途径，列名或列号可用于标识要从中获取数据的列。例如，如果数据表中第一列的列名为a，存储类型为整型，则可以使用两种方法获取存储在该列中的值，如：int x=rs.getInt(“a”);或者：int x=rs.getInt(1);</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(rs.next())&#123;</span><br><span class="line">  <span class="keyword">int</span> x=rs.getInt(<span class="string">&quot;s&quot;</span>);</span><br><span class="line">  String s=rs.getString(<span class="string">&quot;b&quot;</span>);</span><br><span class="line">  <span class="keyword">float</span> f=rs.getFloat(<span class="string">&quot;c&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="JDBC应用"><a href="#JDBC应用" class="headerlink" title="JDBC应用"></a>JDBC应用</h3><p>案例需求：对学生信息表进行管理，要求如下：</p>
+<p>学生信息表存储在MySQL中，通过JDBC对学生信息进行增、删、改、查操作。</p>
+<p>数据库test，表students，表结构如下：</p>
+<table>
+<thead>
+<tr>
+<th><strong>字段名称</strong></th>
+<th><strong>字段说明</strong></th>
+<th><strong>数据类型</strong></th>
+<th><strong>大小</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>studentId</strong></td>
+<td><strong>学号</strong></td>
+<td><strong>varchar</strong></td>
+<td><strong>12</strong></td>
+</tr>
+<tr>
+<td><strong>studentName</strong></td>
+<td><strong>姓名</strong></td>
+<td><strong>varchar</strong></td>
+<td><strong>30</strong></td>
+</tr>
+<tr>
+<td><strong>studentPwd</strong></td>
+<td><strong>密码</strong></td>
+<td><strong>varchar</strong></td>
+<td><strong>12</strong></td>
+</tr>
+<tr>
+<td><strong>sex</strong></td>
+<td><strong>性别</strong></td>
+<td><strong>varchar</strong></td>
+<td><strong>2</strong></td>
+</tr>
+<tr>
+<td><strong>classId</strong></td>
+<td><strong>班级Id</strong></td>
+<td><strong>int</strong></td>
+<td><strong>8</strong></td>
+</tr>
+</tbody></table>
+<p><strong>步骤如下</strong></p>
+<ol>
+<li>新建项目，导入MySQL驱动，并添加到类路径中。</li>
+<li>连接数据库的类<strong>ConnectionManager</strong>。专门负责建立数据库的连接以及执行关闭操作。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.sql.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConnectionManager</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String DRIVER_CLASS =<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span>;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String DATABASE_URL = <span class="string">&quot;jdbc:mysql://localhost:3306/DatabaseName?characterEncoding=UTF-8&quot;</span>;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String DATABASE_USRE = <span class="string">&quot;root&quot;</span>;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String DATABASE_PASSWORD = <span class="string">&quot;123456&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** 返回连接 */</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Connection <span class="title">getConnection</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Connection dbConnection = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      Class.forName(DRIVER_CLASS);</span><br><span class="line">      dbConnection = DriverManager.getConnection(DATABASE_URL,DATABASE_USRE, DATABASE_PASSWORD);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;   e.printStackTrace();   &#125;</span><br><span class="line">    <span class="keyword">return</span> dbConnection;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** 关闭连接*/</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">closeConnection</span><span class="params">(Connection dbConnection)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (dbConnection != <span class="keyword">null</span> &amp;&amp; (!dbConnection.isClosed())) &#123;</span><br><span class="line">       dbConnection.close();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (SQLException sqlEx) &#123; sqlEx.printStackTrace(); &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**关闭结果集*/</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">closeResultSet</span><span class="params">(ResultSet res)</span> </span>&#123;</span><br><span class="line">     <span class="keyword">try</span> &#123;</span><br><span class="line">       <span class="keyword">if</span> (res != <span class="keyword">null</span>) &#123;</span><br><span class="line">         res.close();</span><br><span class="line">        &#125;</span><br><span class="line">     &#125; <span class="keyword">catch</span> (SQLException e) &#123; e.printStackTrace(); &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** 关闭语句*/</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">closeStatement</span><span class="params">(PreparedStatement pStatement)</span> </span>&#123;</span><br><span class="line">     <span class="keyword">try</span> &#123;</span><br><span class="line">       <span class="keyword">if</span> (pStatement != <span class="keyword">null</span>) &#123;</span><br><span class="line">         pStatement.close();</span><br><span class="line">       &#125;</span><br><span class="line">     &#125; <span class="keyword">catch</span> (SQLException e) &#123; e.printStackTrace(); &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">closeStatement</span><span class="params">(Statement statement)</span> </span>&#123;</span><br><span class="line">     <span class="keyword">try</span> &#123;</span><br><span class="line">       <span class="keyword">if</span> (statement != <span class="keyword">null</span>) &#123;</span><br><span class="line">          statement.close();</span><br><span class="line">       &#125;</span><br><span class="line">     &#125; <span class="keyword">catch</span> (SQLException e) &#123; e.printStackTrace(); &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注：</strong>如果不关闭Statement对象和数据库连接，它们会一直占用服务器资源，直到Java垃圾收集程序来回收它，有潜在的内存问题。</p>
+<p><strong>学生类</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Students</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> String studentId;</span><br><span class="line">  <span class="keyword">private</span> String studentName;</span><br><span class="line">  <span class="keyword">private</span> String studentPwd;</span><br><span class="line">  <span class="keyword">private</span> String sex;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> classId;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Students</span><span class="params">(String studentId, String studentName, String studentPwd,String sex, <span class="keyword">int</span> classId)</span> </span>&#123;</span><br><span class="line">   <span class="keyword">this</span>.studentId = studentId;</span><br><span class="line">   <span class="keyword">this</span>.studentName = studentName;</span><br><span class="line">   <span class="keyword">this</span>.studentPwd = studentPwd;</span><br><span class="line">   <span class="keyword">this</span>.sex = sex;</span><br><span class="line">   <span class="keyword">this</span>.classId = classId;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//各属性的setter方法和getter方法</span></span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="Statement语句"><a href="#Statement语句" class="headerlink" title="Statement语句"></a>Statement语句</h5><p>使用Connection对象可以生成Statement实例。Statement接口中包含很多基本的数据库操作方法，下面列出了执行SQL命令的三个方法。</p>
+<p>(1)<strong>ResultSet executeQuery(String sql)</strong>:可以执行SQL查询并获取到ResultSet对象。</p>
+<p>(2)**int executeUpdate(String sql)**：可以执行插入、删除、更新等操作，返回值是执行该操作所影响的行数。</p>
+<p>(3)<strong>boolean execute(String sql)</strong>:这是一个最为一般的执行方法，可以执行任意SQL语句，然后获得一个布尔值，表示是否返回ResultSet。</p>
+<p><strong>例</strong>：使用Statement插入数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.sql.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudentsDB</span> </span>&#123;</span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">  Connection con=<span class="keyword">null</span>;</span><br><span class="line">  Statement statement=<span class="keyword">null</span>;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">   con = ConnectionManager.getConnection();<span class="comment">//1.创建连接</span></span><br><span class="line">   String strSql = <span class="string">&quot;insert into Students values(&#x27;2013880123&#x27;,&#x27;康熙&#x27;,&#x27;1234&#x27;,&#x27;男&#x27;,10201541)&quot;</span>;</span><br><span class="line">   statement = con.createStatement();<span class="comment">//2.创建语句总管</span></span><br><span class="line">   statement.execute(strSql);<span class="comment">//3.语句总管执行SQL语句</span></span><br><span class="line">  &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">  &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">    ConnectionManager.closeStatement(statement);<span class="comment">//4.关闭语句总管、连接</span></span><br><span class="line">    ConnectionManager.closeConnection(con);</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="PreparedStatement语句"><a href="#PreparedStatement语句" class="headerlink" title="PreparedStatement语句"></a>PreparedStatement语句</h5><p>PreparedStatement接口继承自Statement接口，PreparedStatement比普通的Statement对象使用起来更加灵活，更有效率。</p>
+<p>  PreparedStatement实例包含已编译的SQL语句，SQL语句可具有一个或多个输入参数，这些输入的值在SQL语句创建时未被指定，而是为每个输入参数保留一个问号（”?”）作为占位符。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PreparedStatement pstmt=con.preparedStatement(<span class="string">&quot;update Table1 set a=? where b=?&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>在执行PreparedStatement对象之前，必须设置每个输入参数的值。可通过调用setXXX方法来完成，其中XXX是与该参数相应的类型。例如，如果参数具有Java类型的long，则使用的方法就是setLong。setXXX方法的第一个参数是要设置的参数的序数位置，第二个参数是设置给该参数的值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pstmt.setLong(<span class="number">1</span>,<span class="number">123456789</span>);</span><br><span class="line">pstmt.setInt(<span class="number">2</span>,<span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+
+<p>由于PreparedStatement对象已编译过，所以其执行速度要快于Statement对象。因此，多次执行的SQL语句应被创建为Preparedment对象，以提高效率。</p>
+<p><strong>例</strong>:使用PreparedStatement插入数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.sql.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudentsDB</span> </span>&#123;</span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">   Connection con = <span class="keyword">null</span>;</span><br><span class="line">   PreparedStatement pStatement = <span class="keyword">null</span>;</span><br><span class="line">   <span class="keyword">try</span> &#123;</span><br><span class="line">     con = ConnectionManager.getConnection(); <span class="comment">//1.创建连接</span></span><br><span class="line">     String strSql = <span class="string">&quot;insert into students values(?,?,?,?,?)&quot;</span>;</span><br><span class="line">     pStatement = con.prepareStatement(strSql); <span class="comment">//2.创建预处理语句总管</span></span><br><span class="line">     pStatement.setString(<span class="number">1</span>, <span class="string">&quot;2008110106&quot;</span>);</span><br><span class="line">     pStatement.setString(<span class="number">2</span>, <span class="string">&quot;乾隆&quot;</span>);</span><br><span class="line">     pStatement.setString(<span class="number">3</span>, <span class="string">&quot;2008&quot;</span>);</span><br><span class="line">     pStatement.setString(<span class="number">4</span>, <span class="string">&quot;男&quot;</span>);</span><br><span class="line">     pStatement.setInt(<span class="number">5</span>, <span class="number">10201541</span>);</span><br><span class="line">     pStatement.executeUpdate(); <span class="comment">//3.语句总管执行SQL语句</span></span><br><span class="line">   &#125; <span class="keyword">catch</span> (SQLException sqlE) &#123;</span><br><span class="line">      sqlE.printStackTrace();</span><br><span class="line">   &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">      ConnectionManager.closeStatement(pStatement);<span class="comment">//4.关闭语句总管、连接</span></span><br><span class="line">      ConnectionManager.closeConnection(con);</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>例</strong>：使用PreparedStatement删除数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.sql.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudentsDB</span> </span>&#123;</span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">  Connection con = <span class="keyword">null</span>;</span><br><span class="line">  PreparedStatement pStatement = <span class="keyword">null</span>;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">   con = ConnectionManager.getConnection(); <span class="comment">//1.创建连接</span></span><br><span class="line">   String strSql = <span class="string">&quot;delete from students where studentName=?&quot;</span>;</span><br><span class="line">   pStatement = con.prepareStatement(strSql); <span class="comment">//2.创建预处理语句总管</span></span><br><span class="line">   pStatement.setString(<span class="number">1</span>, <span class="string">&quot;乾隆&quot;</span>);</span><br><span class="line">   <span class="keyword">int</span> row=pStatement.executeUpdate(); <span class="comment">//3.语句总管执行SQL语句</span></span><br><span class="line">   System.out.println(<span class="string">&quot;成功删除&quot;</span>+row+<span class="string">&quot;条数据！&quot;</span>);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (SQLException sqlE) &#123;</span><br><span class="line">    sqlE.printStackTrace();</span><br><span class="line">  &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    ConnectionManager.closeStatement(pStatement);<span class="comment">//4.关闭语句总管、连接</span></span><br><span class="line">    ConnectionManager.closeConnection(con);</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>例</strong>：使用PreparedStatement更新数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.sql.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudentsDB</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Connection con = <span class="keyword">null</span>;</span><br><span class="line">    PreparedStatement pStatement = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      con = ConnectionManager.getConnection();<span class="comment">//1.创建连接</span></span><br><span class="line">      String strSql = <span class="string">&quot;update students set studentName = ? where studentId = ?&quot;</span>;</span><br><span class="line">      pStatement = con.prepareStatement(strSql);<span class="comment">//2.创建预处理语句总管</span></span><br><span class="line">      pStatement.setString(<span class="number">1</span>, <span class="string">&quot;玄烨&quot;</span>);</span><br><span class="line">      pStatement.setString(<span class="number">2</span>,<span class="string">&quot;2013880123&quot;</span> );</span><br><span class="line">      <span class="keyword">int</span> row = pStatement.executeUpdate();<span class="comment">//3.语句总管执行SQL语句</span></span><br><span class="line">      System.out.println(<span class="string">&quot;成功更新了&quot;</span>+row+<span class="string">&quot;行数据!&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (SQLException sqlE) &#123;</span><br><span class="line">     sqlE.printStackTrace();</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">     ConnectionManager.closeStatement(pStatement);<span class="comment">//4.关闭语句总管、连接</span></span><br><span class="line">     ConnectionManager.closeConnection(con);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>例</strong>：使用PreparedStatement查询数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.sql.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudentsDB</span> </span>&#123;</span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">  Connection con = <span class="keyword">null</span>;</span><br><span class="line">  PreparedStatement pStatement = <span class="keyword">null</span>;</span><br><span class="line">  ResultSet resSet=<span class="keyword">null</span>;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">   con = ConnectionManager.getConnection(); <span class="comment">//1.创建连接</span></span><br><span class="line">   String strSql = <span class="string">&quot;select * from students where studentName=?&quot;</span>;</span><br><span class="line">   pStatement = con.prepareStatement(strSql); <span class="comment">//2.创建预处理语句总管</span></span><br><span class="line">   pStatement.setString(<span class="number">1</span>, <span class="string">&quot;谢亚飞&quot;</span>);</span><br><span class="line">   resSet=pStatement.executeQuery(); <span class="comment">//3.语句总管执行SQL语句</span></span><br><span class="line">   <span class="keyword">if</span>(resSet.next())&#123;</span><br><span class="line">     System.out.println(<span class="string">&quot;学号为：&quot;</span>+resSet.getString(<span class="number">1</span>));</span><br><span class="line">     System.out.println(<span class="string">&quot;姓名为：&quot;</span>+resSet.getString(<span class="number">2</span>));</span><br><span class="line">     System.out.println(<span class="string">&quot;密码为：&quot;</span>+resSet.getString(<span class="number">3</span>));</span><br><span class="line">     System.out.println(<span class="string">&quot;性别为：&quot;</span>+resSet.getString(<span class="number">4</span>));</span><br><span class="line">     System.out.println(<span class="string">&quot;班级号为：&quot;</span>+resSet.getInt(<span class="number">5</span>));</span><br><span class="line">   &#125;</span><br><span class="line">  &#125; <span class="keyword">catch</span> (SQLException sqlE) &#123;</span><br><span class="line">     sqlE.printStackTrace();</span><br><span class="line">  &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">     ConnectionManager.closeStatement(pStatement);<span class="comment">//4.关闭语句总管、连接</span></span><br><span class="line">     ConnectionManager.closeConnection(con);</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>例</strong>：使用PreparedStatement查询所有学生信息</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">import</span> java.sql.*;</span><br><span class="line"><span class="keyword">import</span> com.vo.Students;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudentsDB</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> List&lt;Students&gt; <span class="title">getAllStudents</span><span class="params">()</span></span>&#123;</span><br><span class="line">  List&lt;Students&gt; allStudents=<span class="keyword">new</span> ArrayList&lt;Students&gt;();</span><br><span class="line">  Connection con=<span class="keyword">null</span>;</span><br><span class="line">  PreparedStatement pStatement=<span class="keyword">null</span>;</span><br><span class="line">  ResultSet res=<span class="keyword">null</span>;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">   con = ConnectionManager.getConnection();<span class="comment">//1.创建连接</span></span><br><span class="line">   String sql = <span class="string">&quot;select * from Students&quot;</span>;</span><br><span class="line">   pStatement = con.prepareStatement(sql);<span class="comment">//2.创建预处理语句总管</span></span><br><span class="line">   res = pStatement.executeQuery();<span class="comment">//3.语句总管执行查询</span></span><br><span class="line">   <span class="keyword">while</span> (res.next()) &#123;</span><br><span class="line">     String studentId = res.getString(<span class="number">1</span>);</span><br><span class="line">     String studentName = res.getString(<span class="string">&quot;studentName&quot;</span>);</span><br><span class="line">     String studentPwd = res.getString(<span class="number">3</span>);</span><br><span class="line">     String sex = res.getString(<span class="string">&quot;sex&quot;</span>);</span><br><span class="line">     <span class="keyword">int</span> classId = res.getInt(<span class="number">5</span>);</span><br><span class="line">     <span class="comment">//构造方法组装成一个Students对象stu</span></span><br><span class="line">     Students stu = <span class="keyword">new</span> Students(studentId, studentName, studentPwd, sex, classId);</span><br><span class="line">     allStudents.add(stu);</span><br><span class="line">   &#125;</span><br><span class="line">  &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">     e.printStackTrace();</span><br><span class="line">  &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">     ConnectionManager.closeResultSet(res);<span class="comment">//5.关闭结果集 对象、语句总管、连接</span></span><br><span class="line">     ConnectionManager.closeStatement(pStatement);</span><br><span class="line">     ConnectionManager.closeConnection(con);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> allStudents;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">   StudentsDB db=<span class="keyword">new</span> StudentsDB();</span><br><span class="line">   List&lt;Students&gt; all=db.getAllStudents();</span><br><span class="line">   <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;all.size();i++)&#123;</span><br><span class="line">    Students stu=(Students)all.get(i);</span><br><span class="line">    System.out.println(stu);</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>案例：</strong>学生信息系统，要求在系统的前台页面上显示所有的从数据库中取出的 学生信息。</p>
+<p>步骤分解：</p>
+<p>(1)设计数据库表结构，表名为students。</p>
+<p>(2)确定存储对象，存储类型为学生类（Students.java），属性的设置与students表的各字段保持一致。</p>
+<p>(3)通过JDBC访问数据库，创建类StudentsDB.java,用来查询数据库,并返回allstudents对象的集合。</p>
+<p>(4)编写JSP文件showStudents.jsp，用来在页面中逐条逐行输出 学生的信息。</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page language=<span class="string">&quot;java&quot;</span> pageEncoding=<span class="string">&quot;gbk&quot;</span>%&gt;</span><br><span class="line">&lt;%@ page <span class="keyword">import</span>=<span class="string">&quot;java.util.*,com.vo.Students,com.db.StudentsDB6&quot;</span> %&gt;</span><br><span class="line">&lt;!DOCTYPE HTML&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;&lt;title&gt;显示所有学生信息&lt;/title&gt;&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"> &lt;table border=<span class="string">&quot;2&quot;</span>&gt;</span><br><span class="line">  &lt;tr&gt;&lt;th&gt;学号&lt;/th&gt;&lt;th&gt;姓名&lt;/th&gt;&lt;th&gt;密码&lt;/th&gt;&lt;th&gt;性别&lt;/th&gt;&lt;th&gt;班级号&lt;/th&gt;&lt;/tr&gt;</span><br><span class="line">  &lt;%</span><br><span class="line">   List&lt;Students&gt; all=<span class="keyword">new</span> ArrayList&lt;Students&gt;();</span><br><span class="line">   StudentsDB db=<span class="keyword">new</span> StudentsDB();</span><br><span class="line">   all=db.getAllStudents();</span><br><span class="line">   <span class="keyword">if</span>(all.size()!=<span class="number">0</span>)&#123;</span><br><span class="line">   <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;all.size();i++)&#123;</span><br><span class="line">    Students stu=(Students)all.get(i);</span><br><span class="line">  %&gt;</span><br><span class="line">  &lt;tr&gt;</span><br><span class="line">   &lt;td&gt;&lt;%=stu.getStudentId() %&gt;&lt;/td&gt;</span><br><span class="line">   &lt;td&gt;&lt;%=stu.getStudentName() %&gt;&lt;/td&gt;</span><br><span class="line">   &lt;td&gt;&lt;%=stu.getStudentPwd() %&gt;&lt;/td&gt;</span><br><span class="line">   &lt;td&gt;&lt;%=stu.getSex() %&gt;&lt;/td&gt;</span><br><span class="line">   &lt;td&gt;&lt;%=stu.getClassId() %&gt;&lt;/td&gt;</span><br><span class="line">  &lt;/tr&gt;</span><br><span class="line">  &lt;%</span><br><span class="line">   &#125; <span class="comment">//end for</span></span><br><span class="line">  &#125;<span class="comment">//end if</span></span><br><span class="line">  %&gt;</span><br><span class="line"> &lt;/table&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javaweb/" rel="tag">javaweb</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-BOM" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/07/08/BOM/" class="article-date">
+  	<time datetime="2020-07-08T06:20:44.000Z" itemprop="datePublished">2020-07-08</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/08/BOM/">
+        BOM
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="BOM与DOM"><a href="#BOM与DOM" class="headerlink" title="BOM与DOM"></a>BOM与DOM</h3><table>
+<thead>
+<tr>
+<th>DOM</th>
+<th>BOM</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>文档对象模型</td>
+<td>浏览器对象模型</td>
+</tr>
+<tr>
+<td>把[文档]当做一个[对象]来对待</td>
+<td>把[浏览器]当做一个[对象]来看待</td>
+</tr>
+<tr>
+<td>顶级对象是document</td>
+<td>顶级对象是window</td>
+</tr>
+<tr>
+<td>主要学习的是操作页面元素</td>
+<td>学习的是浏览器窗口交互的一些对象</td>
+</tr>
+<tr>
+<td>W3C标准规范</td>
+<td>浏览器厂商在各自浏览器上定义的，兼容性较差</td>
+</tr>
+</tbody></table>
+<h3 id="BOM的构成"><a href="#BOM的构成" class="headerlink" title="BOM的构成"></a>BOM的构成</h3><p>window对象是浏览器的顶级对象，它具有双重角色。</p>
+<ol>
+<li>它是JS访问浏览器窗口的一个接口。</li>
+<li>它是一个全局对象。定义在全局作用域中的变量、函数都会变成window对象的属性和方法。</li>
+</ol>
+<p>在调用的时候可以忽略window，如alert () 、prompt () 等</p>
+<p><strong>注：</strong>声明变量的时候最好不要用<code>name</code>，window下的一个特殊属性window.name本身是有定义的。</p>
+<h3 id="window对象的常见事件"><a href="#window对象的常见事件" class="headerlink" title="window对象的常见事件"></a>window对象的常见事件</h3><h4 id="窗口加载事件"><a href="#窗口加载事件" class="headerlink" title="窗口加载事件"></a>窗口加载事件</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">或者</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">&quot;load&quot;</span> , <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>window.onload是窗口（页面）加载事件，当文档内容完全加载完成会触发该事件（包括图像、脚本文件、CSS、文件等），就调用该处理函数。</p>
+<p><strong>注意：</strong></p>
+<ol>
+<li>有了window.onload就可以把js代码写到页面元素的上方，因为onload是等页面全部加载完毕，再去执行处理函数。</li>
+<li>window.onload传统注册事件方式只能写一次，如果有多个，会以最后一个window。onload为准。</li>
+<li>如果使用addEventListener则没有限制</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">&#x27;DOMContentLoaded&#x27;</span> , <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>DOMContentLoaded事件触发时，仅当DOM加载完成，<strong>不包括样式表，图片，flash等等</strong></p>
+<p>ie9以上才支持</p>
+<p>如果页面的图片很多的话，从用户访问到onload触发可能需要较长的事件，交互效果就不能实现，必然影响用户的体验，此时用DOMContentLoaded事件比较合适。</p>
+<h4 id="调整窗口大小事件"><a href="#调整窗口大小事件" class="headerlink" title="调整窗口大小事件"></a>调整窗口大小事件</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onresize = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">&quot;resize&quot;</span> ,<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>window.onresize是调整窗口大小加载事件，当触发时就调用的处理函数</p>
+<p><strong>注意：</strong></p>
+<ol>
+<li>只要窗口大小发生像素变化，就会触发这个事件。</li>
+<li>经常利用这个事件完成响应式布局。window.innerWidth当前屏幕的宽度</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/" rel="tag">js</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
+    </nav>
+  
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2021 John Doe
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/preccrep/hexo-theme-jelly" target="_blank">Jelly</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: true,
+		isPost: false,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
