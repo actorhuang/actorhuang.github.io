@@ -148,6 +148,121 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-BOM" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/07/08/BOM/" class="article-date">
+  	<time datetime="2020-07-08T06:20:44.000Z" itemprop="datePublished">2020-07-08</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/08/BOM/">
+        BOM
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="BOM与DOM"><a href="#BOM与DOM" class="headerlink" title="BOM与DOM"></a>BOM与DOM</h3><table>
+<thead>
+<tr>
+<th>DOM</th>
+<th>BOM</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>文档对象模型</td>
+<td>浏览器对象模型</td>
+</tr>
+<tr>
+<td>把[文档]当做一个[对象]来对待</td>
+<td>把[浏览器]当做一个[对象]来看待</td>
+</tr>
+<tr>
+<td>顶级对象是document</td>
+<td>顶级对象是window</td>
+</tr>
+<tr>
+<td>主要学习的是操作页面元素</td>
+<td>学习的是浏览器窗口交互的一些对象</td>
+</tr>
+<tr>
+<td>W3C标准规范</td>
+<td>浏览器厂商在各自浏览器上定义的，兼容性较差</td>
+</tr>
+</tbody></table>
+<h3 id="BOM的构成"><a href="#BOM的构成" class="headerlink" title="BOM的构成"></a>BOM的构成</h3><p>window对象是浏览器的顶级对象，它具有双重角色。</p>
+<ol>
+<li>它是JS访问浏览器窗口的一个接口。</li>
+<li>它是一个全局对象。定义在全局作用域中的变量、函数都会变成window对象的属性和方法。</li>
+</ol>
+<p>在调用的时候可以忽略window，如alert () 、prompt () 等</p>
+<p><strong>注：</strong>声明变量的时候最好不要用<code>name</code>，window下的一个特殊属性window.name本身是有定义的。</p>
+<h3 id="window对象的常见事件"><a href="#window对象的常见事件" class="headerlink" title="window对象的常见事件"></a>window对象的常见事件</h3><h4 id="窗口加载事件"><a href="#窗口加载事件" class="headerlink" title="窗口加载事件"></a>窗口加载事件</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">或者</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">&quot;load&quot;</span> , <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>window.onload是窗口（页面）加载事件，当文档内容完全加载完成会触发该事件（包括图像、脚本文件、CSS、文件等），就调用该处理函数。</p>
+<p><strong>注意：</strong></p>
+<ol>
+<li>有了window.onload就可以把js代码写到页面元素的上方，因为onload是等页面全部加载完毕，再去执行处理函数。</li>
+<li>window.onload传统注册事件方式只能写一次，如果有多个，会以最后一个window。onload为准。</li>
+<li>如果使用addEventListener则没有限制</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">&#x27;DOMContentLoaded&#x27;</span> , <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>DOMContentLoaded事件触发时，仅当DOM加载完成，<strong>不包括样式表，图片，flash等等</strong></p>
+<p>ie9以上才支持</p>
+<p>如果页面的图片很多的话，从用户访问到onload触发可能需要较长的事件，交互效果就不能实现，必然影响用户的体验，此时用DOMContentLoaded事件比较合适。</p>
+<h4 id="调整窗口大小事件"><a href="#调整窗口大小事件" class="headerlink" title="调整窗口大小事件"></a>调整窗口大小事件</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onresize = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">&quot;resize&quot;</span> ,<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>window.onresize是调整窗口大小加载事件，当触发时就调用的处理函数</p>
+<p><strong>注意：</strong></p>
+<ol>
+<li>只要窗口大小发生像素变化，就会触发这个事件。</li>
+<li>经常利用这个事件完成响应式布局。window.innerWidth当前屏幕的宽度</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/" rel="tag">js</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-DOM重点核心" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">

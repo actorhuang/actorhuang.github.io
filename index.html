@@ -148,6 +148,61 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-es6新特性" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/08/21/es6%E6%96%B0%E7%89%B9%E6%80%A7/" class="article-date">
+  	<time datetime="2021-08-21T03:56:08.000Z" itemprop="datePublished">2021-08-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/21/es6%E6%96%B0%E7%89%B9%E6%80%A7/">
+        es6新特性
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="/2021/08/21/es6%E6%96%B0%E7%89%B9%E6%80%A7/exa8_1%E4%BB%A3%E7%A0%81.png" alt="exa8_1代码"></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-未处理的rejection" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1021,113 +1076,6 @@
 <li>输入set-ExecutionPolicy RemoteSigned</li>
 <li>之后选择Y或者A就能正常执行脚本了</li>
 </ol>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node/" rel="tag">node</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-node服务器端" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/09/12/node%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF/" class="article-date">
-  	<time datetime="2020-09-12T09:07:09.000Z" itemprop="datePublished">2020-09-12</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/12/node%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF/">
-        node服务器端
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="创建web服务器"><a href="#创建web服务器" class="headerlink" title="创建web服务器"></a>创建web服务器</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">&quot;http&quot;</span>);</span><br><span class="line"><span class="comment">//创建web服务器，app就是网站服务器对象</span></span><br><span class="line"><span class="keyword">const</span> app = http.createServer();</span><br><span class="line"><span class="comment">//当客户端有请求来的时候</span></span><br><span class="line">app.on(<span class="string">&quot;request&quot;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  res.end(<span class="string">&quot;&lt;h1&gt;hello world&lt;/h1&gt;&quot;</span>);</span><br><span class="line">  <span class="comment">// res.end(&quot;&lt;h2&gt;你好世界&lt;/h2&gt;&quot;);</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//监听端口</span></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;服务器已启动，监听3000端口&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-<h3 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h3><h4 id="请求报文"><a href="#请求报文" class="headerlink" title="请求报文"></a>请求报文</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">req.url          <span class="comment">//获取请求地址</span></span><br><span class="line">req.headers     <span class="comment">//获取请求报文</span></span><br><span class="line">req.method     <span class="comment">//获取请求方法</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">app.on(<span class="string">&quot;request&quot;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(req.method)</span><br><span class="line">  <span class="built_in">console</span>.log(req.headers[<span class="string">&#x27;accept&#x27;</span>])		<span class="comment">//获取具体键的内容</span></span><br><span class="line">  <span class="keyword">if</span> (req.url == <span class="string">&quot;/index&quot;</span> || req.url == <span class="string">&quot;/&quot;</span>) &#123;</span><br><span class="line">    res.end(<span class="string">&quot;welcome to indexPage&quot;</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (req.url == <span class="string">&quot;/list&quot;</span>) &#123;</span><br><span class="line">    res.end(<span class="string">&quot;welcome to listPage&quot;</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    res.end(<span class="string">&quot;404 Not Found&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h4 id="响应报文"><a href="#响应报文" class="headerlink" title="响应报文"></a>响应报文</h4><ol>
-<li>HTTP状态码</li>
-</ol>
-<ul>
-<li>200 请求成功</li>
-<li>404 请求的资源没有被找到</li>
-<li>500 服务端错误</li>
-<li>400 客户端有语法错误</li>
-</ul>
-<p>设置状态码</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">res.writeHead(状态码)</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>内容类型</li>
-</ol>
-<ul>
-<li>text/html</li>
-<li>text/css</li>
-<li>application/javascript</li>
-<li>image/jpeg</li>
-<li>application/json</li>
-</ul>
-<p>设置内容类型</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">res.wirteHead(200,&#123;</span><br><span class="line">	&#x27;content-type&#x27;: &#x27;text/html;charset=utf8&#x27;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h3 id="HTTP请求与响应处理"><a href="#HTTP请求与响应处理" class="headerlink" title="HTTP请求与响应处理"></a>HTTP请求与响应处理</h3><h4 id="GET请求参数"><a href="#GET请求参数" class="headerlink" title="GET请求参数"></a>GET请求参数</h4><ul>
-<li>参数被放置在浏览器地址栏中，例如：<a target="_blank" rel="noopener" href="http://localhost:3000/?name=zhangsan&amp;age=18">http://localhost:3000/?name=zhangsan&amp;age=18</a></li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//引入url模块</span></span><br><span class="line"><span class="keyword">const</span> url = <span class="built_in">require</span>(<span class="string">&#x27;url&#x27;</span>)</span><br><span class="line"><span class="comment">//第一个参数：要解析的url地址</span></span><br><span class="line"><span class="comment">//第二个参数：将查询参数解析成对象形式</span></span><br><span class="line"><span class="comment">//利用对象解构的方式解构出query和pathname</span></span><br><span class="line"><span class="keyword">let</span> &#123; query, pathname &#125; = url.parse(req.url, <span class="literal">true</span>);</span><br><span class="line"><span class="built_in">console</span>.log(query.name);</span><br><span class="line"><span class="built_in">console</span>.log(query.age);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (pathname == <span class="string">&quot;/index&quot;</span> || req.url == <span class="string">&quot;/&quot;</span>) &#123;</span><br><span class="line">	res.end(<span class="string">&quot;welcome to indexPage&quot;</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (pathname == <span class="string">&quot;/list&quot;</span>) &#123;</span><br><span class="line">	res.end(<span class="string">&quot;welcome to listPage&quot;</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	res.end(<span class="string">&quot;404 Not Found&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="POST请求参数"><a href="#POST请求参数" class="headerlink" title="POST请求参数"></a>POST请求参数</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">&quot;http&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> app = http.createServer();</span><br><span class="line"><span class="comment">//处理请求参数模块</span></span><br><span class="line"><span class="keyword">const</span> querystring = <span class="built_in">require</span>(<span class="string">&quot;querystring&quot;</span>);</span><br><span class="line">app.on(<span class="string">&quot;request&quot;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">//post参数是通过事件的方式接受的</span></span><br><span class="line">  <span class="comment">//当请求参数传递的时候触发data事件</span></span><br><span class="line">  <span class="comment">//当参数传递完成的时候触发end事件</span></span><br><span class="line">  <span class="keyword">let</span> postParams = <span class="string">&quot;&quot;</span>;</span><br><span class="line">  req.on(<span class="string">&quot;data&quot;</span>, <span class="function">(<span class="params">param</span>) =&gt;</span> &#123;</span><br><span class="line">    postParams += param;</span><br><span class="line">  &#125;);</span><br><span class="line">  req.on(<span class="string">&quot;end&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(querystring.parse(postParams));</span><br><span class="line">  &#125;);</span><br><span class="line">  res.end(<span class="string">&quot;ok&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line">app.listen(<span class="number">3001</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;服务器启动成功，监听3001端口&quot;</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h4 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.引入系统模块http</span></span><br><span class="line"><span class="comment">//2.创建网站服务器</span></span><br><span class="line"><span class="comment">//3.为网站服务器对象添加请求事件</span></span><br><span class="line"><span class="comment">//4.实现路由功能</span></span><br><span class="line"><span class="comment">//  1.获取客户端的请求方式</span></span><br><span class="line"><span class="comment">//  2.获取客户端的请求地址</span></span><br><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">&quot;http&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> app = http.createServer();</span><br><span class="line"><span class="keyword">const</span> url = <span class="built_in">require</span>(<span class="string">&quot;url&quot;</span>);</span><br><span class="line">app.on(<span class="string">&quot;request&quot;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> method = req.method.toLowerCase();</span><br><span class="line">  <span class="keyword">const</span> pathname = url.parse(req.url).pathname;</span><br><span class="line"></span><br><span class="line">  res.writeHead(<span class="number">200</span>, &#123;</span><br><span class="line">    <span class="string">&quot;content-type&quot;</span>: <span class="string">&quot;text/html;charset=utf8&quot;</span>,</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">if</span> (method == <span class="string">&quot;get&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (pathname == <span class="string">&quot;/&quot;</span> || pathname == <span class="string">&quot;/index&quot;</span>) &#123;</span><br><span class="line">      res.end(<span class="string">&quot;欢迎来到首页&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (pathname == <span class="string">&quot;/list&quot;</span>) &#123;</span><br><span class="line">      res.end(<span class="string">&quot;欢迎来到列表页&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      res.end(<span class="string">&quot;您访问的页面不存在&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (method == <span class="string">&quot;post&quot;</span>) &#123;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;服务器启动成功，监听3000端口&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-<h4 id="静态资源"><a href="#静态资源" class="headerlink" title="静态资源"></a>静态资源</h4><p>服务器端不需要处理，可以直接响应给客户端的资源就是静态资源，例如CSS、JavaScript、image文件</p>
-<p>静态文件访问</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">const http = require(&quot;http&quot;);</span><br><span class="line">const url = require(&quot;url&quot;);</span><br><span class="line">const path = require(&quot;path&quot;);</span><br><span class="line">const fs = require(&quot;fs&quot;);</span><br><span class="line">const mime = require(&quot;mime&quot;);</span><br><span class="line">const app = http.createServer();</span><br><span class="line">app.on(&quot;request&quot;, (req, res) =&gt; &#123;</span><br><span class="line">  let pathname = url.parse(req.url).pathname;</span><br><span class="line">  //当访问时不加后缀时默认访问一个网页</span><br><span class="line">  pathname = pathname == &quot;/&quot; ? &quot;/default.html&quot; : pathname;</span><br><span class="line">  //将用户的请求路径转换为实际的服务器硬盘路径</span><br><span class="line">  let realPath = path.join(__dirname, &quot;public&quot; + pathname);</span><br><span class="line">  let type = mime.getType(realPath);</span><br><span class="line">  fs.readFile(realPath, (error, result) =&gt; &#123;</span><br><span class="line">    if (error != null) &#123;</span><br><span class="line">      res.writeHead(404, &#123;</span><br><span class="line">        &quot;content-type&quot;: &quot;text/html;charset=utf8&quot;,</span><br><span class="line">      &#125;);</span><br><span class="line">      res.end(&quot;文件读取失败&quot;);</span><br><span class="line">      return;</span><br><span class="line">    &#125;</span><br><span class="line">    //因为无法确定返回资源的类型，需要先引入mime（npm install mime）模块，使用mime的getType方法获取到文件类型</span><br><span class="line">    res.writeHead(200, &#123;</span><br><span class="line">      &quot;content-type&quot;: type,</span><br><span class="line">    &#125;);</span><br><span class="line">    res.end(result);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">app.listen(3000);</span><br><span class="line">console.log(&quot;服务器启动成功&quot;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="动态资源"><a href="#动态资源" class="headerlink" title="动态资源"></a>动态资源</h4><p>相同的请求地址不同的响应资源，这种资源就是动态资源</p>
-<p><a target="_blank" rel="noopener" href="http://www.baidu.com/passage?id=1">http://www.baidu.com/passage?id=1</a></p>
-<p><a target="_blank" rel="noopener" href="http://www.baidu.com/passage?id=2">http://www.baidu.com/passage?id=2</a></p>
 
       
     </div>
